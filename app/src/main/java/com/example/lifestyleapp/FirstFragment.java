@@ -45,8 +45,8 @@ public class FirstFragment extends Fragment {
         ArrayAdapter<Integer> spinnerArrayAdapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_spinner_item, age);
         spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_item );
 
-        Spinner spinner = (Spinner)getActivity().findViewById(R.id.ageSpinner);
-        spinner.setAdapter(spinnerArrayAdapter);
+        ComboBox ageSpinner = (ComboBox) getActivity().findViewById(R.id.ageSpinner);
+        ageSpinner.setAdapter(spinnerArrayAdapter);
         //
 
         //City autocomplete
@@ -71,7 +71,7 @@ public class FirstFragment extends Fragment {
         ArrayAdapter<Integer> feetArrayAdapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_spinner_item, feetList);
         spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_item );
 
-        Spinner feetSpinner = (Spinner)getActivity().findViewById(R.id.feetSpinner);
+        ComboBox feetSpinner = (ComboBox) getActivity().findViewById(R.id.feetSpinner);
         feetSpinner.setAdapter(feetArrayAdapter);
 
         List inchList = new ArrayList<Integer>();
@@ -81,7 +81,7 @@ public class FirstFragment extends Fragment {
         ArrayAdapter<Integer> inchArrayAdapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_spinner_item, inchList);
         spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_item );
 
-        Spinner inchSpinner = (Spinner)getActivity().findViewById(R.id.inchSpinner);
+        ComboBox inchSpinner = (ComboBox) getActivity().findViewById(R.id.inchSpinner);
         inchSpinner.setAdapter(inchArrayAdapter);
         //End height
 
