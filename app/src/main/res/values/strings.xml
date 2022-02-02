@@ -4,9 +4,31 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
-    <string name="Submit">Submit</string>
     <string name="previous">Previous</string>
 
     <string name="FirstNameTV">First Name:</string>
     <string name="LastNameTV">Last Name:</string>
+    <string name="userAge">Age:</string>
+    <string name="userFeet">Feet</string>
+    <string name="userInches">Inches:</string>
+    <string name="userWeight">Weight: lbs</string>
+    <string name="radioMale">Male</string>
+    <string name="radioFemale">Female</string>
+    <string name="uploadPicture">Upload Profile Picture</string>
+    <string name="submitBtn">Submit!</string>
+    <string name="disclaimer">This information is used for certain health calculations and will no be shared under any circumstances</string>
+
+
+
+    <string-array name="countries">
+        <item>United States</item>
+        <item>Canada</item>
+        <item>Mexico</item>
+    </string-array>
+
+    <string-array name="cities">
+        <item>Provo</item>
+        <item>Salt Lake City</item>
+        <item>Orem</item>
+    </string-array>
 </resources>

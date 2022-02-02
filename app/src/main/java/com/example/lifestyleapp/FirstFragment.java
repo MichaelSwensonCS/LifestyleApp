@@ -1,5 +1,6 @@
 package com.example.lifestyleapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,7 +21,7 @@ import com.example.lifestyleapp.databinding.FragmentFirstBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FirstFragment extends Fragment {
+public class FirstFragment extends Fragment implements View.OnClickListener{
 
     private FragmentFirstBinding binding;
 
@@ -45,7 +48,7 @@ public class FirstFragment extends Fragment {
         ArrayAdapter<Integer> spinnerArrayAdapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_spinner_item, age);
         spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_item );
 
-        ComboBox ageSpinner = (ComboBox) getActivity().findViewById(R.id.ageSpinner);
+        AutoCompleteTextView ageSpinner = (AutoCompleteTextView) getActivity().findViewById(R.id.ageDropDown);
         ageSpinner.setAdapter(spinnerArrayAdapter);
         //
 
@@ -71,7 +74,7 @@ public class FirstFragment extends Fragment {
         ArrayAdapter<Integer> feetArrayAdapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_spinner_item, feetList);
         spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_item );
 
-        ComboBox feetSpinner = (ComboBox) getActivity().findViewById(R.id.feetSpinner);
+        AutoCompleteTextView feetSpinner = (AutoCompleteTextView) getActivity().findViewById(R.id.feetAuto);
         feetSpinner.setAdapter(feetArrayAdapter);
 
         List inchList = new ArrayList<Integer>();
@@ -81,32 +84,32 @@ public class FirstFragment extends Fragment {
         ArrayAdapter<Integer> inchArrayAdapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_spinner_item, inchList);
         spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_item );
 
-        ComboBox inchSpinner = (ComboBox) getActivity().findViewById(R.id.inchSpinner);
+        AutoCompleteTextView inchSpinner = (AutoCompleteTextView) getActivity().findViewById(R.id.inchesAuto);
         inchSpinner.setAdapter(inchArrayAdapter);
         //End height
 
+        Context context = getContext();
+        CharSequence text = "Female Selected";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context,text,duration);
 
-
-
-        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
+        RadioGroup radioGroup = (RadioGroup) getActivity().findViewById(R.id.radioSexGroup);
+        binding.radioSexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
             @Override
-            public void onClick(View view) {
-                boolean checked = ((RadioButton) view).isChecked();
-
-                // Check which radio button was clicked
-                switch(view.getId()) {
-                    case R.id.maleRadioBtn:
-                        if (checked)
-                            // Pirates are the best
-                            break;
-                    case R.id.femaleRadioBtn:
-                        if (checked)
-                            // Ninjas rule
-                            break;
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId){
+                    case R.id.radioFemale:
+                        toast.show();
+                        break;
+                    case R.id.radioMale:
+                    default:
+                        break;
                 }
             }
         });
     }
+
 /*
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
@@ -142,4 +145,25 @@ public class FirstFragment extends Fragment {
     }
 
 
+    @Override
+    public void onClick(View view) {
+        Context context = getContext();
+        CharSequence text = view.getId() + "";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context,text,duration);
+
+        switch(view.getId()){
+            case R.id.radioFemale:
+                toast.show();
+                break;
+            case R.id.radioMale:
+                toast.show();
+                break;
+            case R.id.submitBtn:
+                toast.show();
+                break;
+            case R.id.uploadPicture:
+                toast.show();
+        }
+    }
 }
