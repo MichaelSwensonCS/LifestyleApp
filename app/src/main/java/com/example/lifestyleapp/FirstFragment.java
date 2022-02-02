@@ -2,6 +2,7 @@ package com.example.lifestyleapp;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -93,6 +95,9 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context,text,duration);
 
+        //AppCompatButton button = (AppCompatButton) getActivity().findViewById(R.id.uploadPicture);
+        //button.setOnClickListener(this);
+
         RadioGroup radioGroup = (RadioGroup) getActivity().findViewById(R.id.radioSexGroup);
         binding.radioSexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
@@ -143,7 +148,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         super.onDestroyView();
         binding = null;
     }
-
 
     @Override
     public void onClick(View view) {

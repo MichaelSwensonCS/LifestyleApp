@@ -53,7 +53,6 @@
         android:layout_marginTop="20dp"
         android:background="@android:color/transparent"
         app:boxBackgroundColor="@android:color/transparent">
-        >
 
         <AutoCompleteTextView
             android:id="@+id/ageDropDown"
@@ -81,7 +80,6 @@
             android:background="@android:color/transparent"
             android:hint="Height"
             app:boxBackgroundColor="@android:color/transparent">
-            >
 
             <AutoCompleteTextView
                 android:id="@+id/feetAuto"
@@ -131,7 +129,6 @@
             android:background="@android:color/transparent"
             android:hint="City"
             app:boxBackgroundColor="@android:color/transparent">
-            >
 
             <AutoCompleteTextView
                 android:id="@+id/cityAuto"
@@ -163,24 +160,6 @@
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_marginTop="32dp"
-        android:background="@android:color/transparent"
-        android:hint="@string/userWeight"
-        app:boxBackgroundColor="@android:color/transparent">
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/userWeight"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="14sp" />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -269,11 +248,6 @@
             android:layout_weight="3"
             android:layout_gravity="center_vertical"
             tools:srcCompat="@tools:sample/avatars[3]" />
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/uploadPicture"
