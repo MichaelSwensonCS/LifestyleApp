@@ -1,27 +1,36 @@
 package com.example.lifestyleapp;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.RadioButton;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.annotation.Nullable;
+
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.lifestyleapp.databinding.FragmentFirstBinding;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class FirstFragment extends Fragment implements View.OnClickListener{
@@ -35,6 +44,14 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
     };
 
     private FragmentFirstBinding binding;
+    //TODO Move weight up near age to fill empty gap
+
+    Bitmap mThumbnailImage;
+
+    //AppCompatButton submitButton;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    Intent mDisplayIntent;
+
 
     private TextInputEditText name_first;
     private TextInputEditText name_last;
@@ -51,6 +68,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
             Bundle savedInstanceState
     ) {
         binding = FragmentFirstBinding.inflate(inflater, container, false);
+
         return binding.getRoot();
     }
 
@@ -80,17 +98,17 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         ArrayAdapter<Integer> agesAdapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_spinner_item, ages);
         agesAdapter.setDropDownViewResource( android.R.layout.simple_spinner_item );
 
-        age = getActivity().findViewById(R.id.ageDropDown);
-        age.setAdapter(agesAdapter);
+
 
         // Weight
         weight = getActivity().findViewById(R.id.userWeight);
 
-        // City
-        ArrayAdapter<String> citiesAdapter = new ArrayAdapter<String>(getActivity(),
+        //City autocomplete
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_1, CITIES);
-        city = getActivity().findViewById(R.id.cityAuto);
-        city.setAdapter(citiesAdapter);
+        AutoCompleteTextView textView = (AutoCompleteTextView)
+                getActivity().findViewById(R.id.cityAuto);
+        textView.setAdapter(adapter);
 
         // Country
         ArrayAdapter<String> countriesAdapter = new ArrayAdapter<String>(getActivity(),
@@ -150,23 +168,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         });
     }
 
-    /*
-    public void onRadioButtonClicked(View view) {
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
-
-        // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.radio_pirates:
-                if (checked)
-                    // Pirates are the best
-                    break;
-            case R.id.radio_ninjas:
-                if (checked)
-                    // Ninjas rule
-                    break;
-        }
-    } */
 
     @Override
     public void onDestroyView() {
@@ -181,10 +182,12 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context,text,duration);
 
+        toast.show();
         switch(view.getId()){
             case R.id.radioFemale:
+                toast.show();
+                break;
             case R.id.radioMale:
-            case R.id.uploadPicture:
                 toast.show();
                 break;
 
@@ -197,6 +200,71 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
                 Toast info = Toast.makeText(context, "BMI: " + bmi, duration);
                 info.show();
                 break;
+            case R.id.uploadPicture:
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if(cameraIntent.resolveActivity(getActivity().getPackageManager())!=null){
+                    startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+                }
+                break;
+            default:
+                break;
         }
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode==REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
+
+            //Get the bitmap
+            Bundle extras = data.getExtras();
+            mThumbnailImage = (Bitmap) extras.get("data");
+
+            //Open a file and write to it
+            if(isExternalStorageWritable()){
+                String filePathString = saveImage(mThumbnailImage);
+                mDisplayIntent.putExtra("imagePath",filePathString);
+                ImageView profile = (ImageView) getActivity().findViewById(R.id.imageView);
+                profile.setImageBitmap(mThumbnailImage);
+
+            }
+            else{
+                Toast.makeText(getActivity(),"External storage not writable.",Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    }
+
+    String currentPhotoPath;
+
+    private String saveImage(Bitmap finalBitmap) {
+        String APP_TAG = "LifestyleApp";
+        String root = Environment.getExternalStorageDirectory().toString();
+        //Had to change this
+        File myDir = new File(getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
+        myDir.mkdirs();
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String fname = "Thumbnail_"+ timeStamp +".jpg";
+
+        File file = new File(myDir, fname);
+        if (file.exists()) file.delete ();
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            out.flush();
+            out.close();
+            Toast.makeText(getActivity(),"file saved!",Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return file.getAbsolutePath();
+    }
+
+    private boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
 }
