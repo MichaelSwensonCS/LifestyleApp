@@ -114,10 +114,14 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context,text,duration);
 
-        AppCompatButton button = (AppCompatButton) getActivity().findViewById(R.id.uploadPicture);
+        // Bind click listener to buttons
+        AppCompatButton button = getActivity().findViewById(R.id.uploadPicture);
+        button.setOnClickListener(this);
+        button = getActivity().findViewById(R.id.submitBtn);
         button.setOnClickListener(this);
 
-        RadioGroup radioGroup = (RadioGroup) getActivity().findViewById(R.id.radioSexGroup);
+
+        RadioGroup radioGroup = getActivity().findViewById(R.id.radioSexGroup);
         binding.radioSexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
@@ -167,16 +171,19 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
 
         switch(view.getId()){
             case R.id.radioFemale:
-                toast.show();
-                break;
             case R.id.radioMale:
-                toast.show();
-                break;
-            case R.id.submitBtn:
-                toast.show();
-                break;
             case R.id.uploadPicture:
                 toast.show();
+                break;
+
+            case R.id.submitBtn:
+                // BMI = 703 × pounds/(inches)^2
+                int pounds = Integer.parseInt(weight.getText().toString());
+                int feet = Integer.parseInt(height_feet.getText().toString());
+                int inches = Integer.parseInt(height_inch.getText().toString());
+                float bmi = (float) (703 * pounds/Math.pow(feet*12 + inches, 2));
+                Toast info = Toast.makeText(context, "BMI: " + bmi, duration);
+                info.show();
                 break;
         }
     }
