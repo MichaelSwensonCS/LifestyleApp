@@ -57,6 +57,17 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+        AppCompatButton submitButton =(AppCompatButton) getActivity().findViewById(R.id.submitBtn);
+        submitButton.setOnClickListener(this);
+
+
+        //This might be a problem
+        mDisplayIntent = new Intent(getActivity(),view.getClass());
+
+
+        //This was needed to populate the dropdown menu(Spinner age)
+        List age = new ArrayList<Integer>();
         // Name
         name_first = getActivity().findViewById(R.id.userFirstName);
         name_last = getActivity().findViewById(R.id.userLastName);
@@ -117,6 +128,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         // Bind click listener to buttons
         AppCompatButton button = getActivity().findViewById(R.id.uploadPicture);
         button.setOnClickListener(this);
+
         button = getActivity().findViewById(R.id.submitBtn);
         button.setOnClickListener(this);
 
