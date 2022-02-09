@@ -19,84 +19,103 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.lifestyleapp.databinding.FragmentFirstBinding;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FirstFragment extends Fragment implements View.OnClickListener{
 
+    private static final String[] COUNTRIES = new String[] {
+            "United States","Canada","Mexico"
+    };
+
+    private static final String[] CITIES = new String[] {
+            "Salt Lake City","West Valley City","Provo", "Orem", "Ogden", "Park City"
+    };
+
     private FragmentFirstBinding binding;
+
+    private TextInputEditText name_first;
+    private TextInputEditText name_last;
+    private AutoCompleteTextView age;
+    private TextInputEditText weight;
+    private AutoCompleteTextView city;
+    private AutoCompleteTextView country;
+    private AutoCompleteTextView height_feet;
+    private AutoCompleteTextView height_inch;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
         binding = FragmentFirstBinding.inflate(inflater, container, false);
-
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //This was needed to populate the dropdown menu(Spinner age)
-        List age = new ArrayList<Integer>();
+        // Name
+        name_first = getActivity().findViewById(R.id.userFirstName);
+        name_last = getActivity().findViewById(R.id.userLastName);
+
+        // Age
+        List ages = new ArrayList<Integer>();
         for (int i = 1; i <= 100; i++) {
-            age.add(Integer.toString(i));
+            ages.add(Integer.toString(i));
         }
-        ArrayAdapter<Integer> spinnerArrayAdapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_spinner_item, age);
-        spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_item );
+        ArrayAdapter<Integer> agesAdapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_spinner_item, ages);
+        agesAdapter.setDropDownViewResource( android.R.layout.simple_spinner_item );
 
-        AutoCompleteTextView ageSpinner = (AutoCompleteTextView) getActivity().findViewById(R.id.ageDropDown);
-        ageSpinner.setAdapter(spinnerArrayAdapter);
-        //
+        age = getActivity().findViewById(R.id.ageDropDown);
+        age.setAdapter(agesAdapter);
 
-        //City autocomplete
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+        // Weight
+        weight = getActivity().findViewById(R.id.userWeight);
+
+        // City
+        ArrayAdapter<String> citiesAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_list_item_1, CITIES);
+        city = getActivity().findViewById(R.id.cityAuto);
+        city.setAdapter(citiesAdapter);
+
+        // Country
+        ArrayAdapter<String> countriesAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_1, COUNTRIES);
-        AutoCompleteTextView textView = (AutoCompleteTextView)
-                getActivity().findViewById(R.id.cityAuto);
-        textView.setAdapter(adapter);
+        country = getActivity().findViewById(R.id.countryAuto);
+        country.setAdapter(countriesAdapter);
 
-        //Country
-        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, COUNTRIES);
-        AutoCompleteTextView textViewCountry = (AutoCompleteTextView)
-                getActivity().findViewById(R.id.countryAuto);
-        textView.setAdapter(adapter);
-
-        //Height
-        List feetList = new ArrayList<Integer>();
+        // Height
+        List heights_feet = new ArrayList<Integer>();
         for(int i = 2; i <= 7; i++){
-            feetList.add(Integer.toString((i)));
+            heights_feet.add(Integer.toString((i)));
         }
-        ArrayAdapter<Integer> feetArrayAdapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_spinner_item, feetList);
-        spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_item );
+        ArrayAdapter<Integer> feetAdapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_spinner_item, heights_feet);
+        feetAdapter.setDropDownViewResource( android.R.layout.simple_spinner_item );
 
-        AutoCompleteTextView feetSpinner = (AutoCompleteTextView) getActivity().findViewById(R.id.feetAuto);
-        feetSpinner.setAdapter(feetArrayAdapter);
+        height_feet = getActivity().findViewById(R.id.feetAuto);
+        height_feet.setAdapter(feetAdapter);
 
-        List inchList = new ArrayList<Integer>();
+        List heights_inch = new ArrayList<Integer>();
         for(int i = 0; i <= 11; i++){
-            inchList.add(Integer.toString((i)));
+            heights_inch.add(Integer.toString((i)));
         }
-        ArrayAdapter<Integer> inchArrayAdapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_spinner_item, inchList);
-        spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_item );
+        ArrayAdapter<Integer> inchAdapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_spinner_item, heights_inch);
+        inchAdapter.setDropDownViewResource( android.R.layout.simple_spinner_item );
 
-        AutoCompleteTextView inchSpinner = (AutoCompleteTextView) getActivity().findViewById(R.id.inchesAuto);
-        inchSpinner.setAdapter(inchArrayAdapter);
-        //End height
+        height_inch = getActivity().findViewById(R.id.inchesAuto);
+        height_inch.setAdapter(inchAdapter);
 
+        // Sex
         Context context = getContext();
         CharSequence text = "Female Selected";
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context,text,duration);
 
-        //AppCompatButton button = (AppCompatButton) getActivity().findViewById(R.id.uploadPicture);
-        //button.setOnClickListener(this);
+        AppCompatButton button = (AppCompatButton) getActivity().findViewById(R.id.uploadPicture);
+        button.setOnClickListener(this);
 
         RadioGroup radioGroup = (RadioGroup) getActivity().findViewById(R.id.radioSexGroup);
         binding.radioSexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
@@ -115,7 +134,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         });
     }
 
-/*
+    /*
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
@@ -131,17 +150,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
                     // Ninjas rule
                     break;
         }
-
-
     } */
-    private static final String[] COUNTRIES = new String[] {
-            "United States","Canada","Mexico"
-    };
-
-    private static final String[] CITIES = new String[] {
-            "Salt Lake City","West Valley City","Provo", "Orem", "Ogden", "Park City"
-    };
-
 
     @Override
     public void onDestroyView() {
@@ -168,6 +177,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.uploadPicture:
                 toast.show();
+                break;
         }
     }
 }
