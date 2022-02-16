@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:layout_margin="20dp"
+    android:background="#78F3D7"
+    android:backgroundTint="#E1FAF4"
+    android:orientation="vertical"
+    tools:context=".ProfileFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="14dp"
+        android:background="@android:color/transparent"
+        app:boxBackgroundColor="@android:color/transparent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/FirstNameTV"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:background="@android:color/transparent"
+        app:boxBackgroundColor="@android:color/transparent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/LastNameTV"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal"
+        android:layout_marginBottom="-15dp"
+        app:boxBackgroundColor="@android:color/transparent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="14dp"
+            android:background="@android:color/transparent"
+            android:hint="Age"
+            app:boxBackgroundColor="@android:color/transparent">
+
+            <AutoCompleteTextView
+                android:id="@+id/ageDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Age:"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="14dp"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/transparent"
+            android:layout_weight="1"
+            app:boxBackgroundColor="@android:color/transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/userWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Weight:"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal"
+        app:boxBackgroundColor="@android:color/transparent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="14dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="Height"
+            app:boxBackgroundColor="@android:color/transparent">
+
+            <AutoCompleteTextView
+                android:id="@+id/feetAuto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Feet:"
+                android:textSize="12sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="14dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="Height"
+            app:boxBackgroundColor="@android:color/transparent">
+
+            <AutoCompleteTextView
+                android:id="@+id/inchesAuto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Inches:"
+                android:textSize="12sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal"
+        app:boxBackgroundColor="@android:color/transparent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="14dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="City"
+            app:boxBackgroundColor="@android:color/transparent">
+
+            <AutoCompleteTextView
+                android:id="@+id/cityAuto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="City"
+                android:textSize="12sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="14dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="Country"
+            app:boxBackgroundColor="@android:color/transparent">
+
+            <AutoCompleteTextView
+                android:id="@+id/countryAuto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Country:"
+                android:textSize="12sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="15dp">
+
+        <TextView
+            android:id="@+id/genderTV"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Biological Sex"
+            android:textSize="14sp"
+            android:background="@android:color/white"
+            app:boxBackgroundColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/genderDisclaimer"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_marginTop="-15dp"
+            android:gravity="center_vertical"
+            android:text="@string/disclaimer"
+            android:textSize="11sp"
+            android:background="@android:color/white"
+            app:boxBackgroundColor="@android:color/white" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/radioSexGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="10dp" >
+
+            <RadioButton
+                android:id="@+id/radioMale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:paddingLeft="40dp"
+                android:text="@string/radioMale" />
+
+            <RadioButton
+                android:id="@+id/radioFemale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="40dp"
+                android:text="@string/radioFemale" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="3"
+            android:minWidth="100dp"
+            android:maxWidth="100dp"
+            android:minHeight="100dp"
+            android:maxHeight="100dp"
+            android:src="@mipmap/default_alpaca_round" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/uploadPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#C9AFF8"
+
+            android:text="@string/uploadPicture"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submitBtn"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/holo_green_light"
+        android:backgroundTint="#A4F842"
+        android:text="@string/submitBtn"
+        android:textSize="12sp" />
+</androidx.appcompat.widget.LinearLayoutCompat>

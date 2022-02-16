@@ -7,7 +7,7 @@
     android:layout_centerHorizontal="true"
     android:layout_margin="20dp"
     android:background="#78F3D7"
-    android:backgroundTint="#E1FAF4"
+    android:backgroundTint="#E0F0E5"
     android:orientation="vertical"
     tools:context=".FirstFragment">
 

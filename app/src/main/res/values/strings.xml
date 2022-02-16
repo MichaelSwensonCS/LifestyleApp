@@ -19,7 +19,6 @@
     <string name="disclaimer">This information is used for certain health calculations and will no be shared under any circumstances</string>
 
 
-
     <string-array name="countries">
         <item>United States</item>
         <item>Canada</item>
@@ -31,4 +30,6 @@
         <item>Salt Lake City</item>
         <item>Orem</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
