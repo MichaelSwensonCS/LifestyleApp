@@ -168,7 +168,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         });
     }
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -266,5 +265,4 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         }
         return false;
     }
-
 }
