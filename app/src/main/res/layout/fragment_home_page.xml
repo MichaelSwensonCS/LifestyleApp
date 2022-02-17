@@ -9,7 +9,7 @@
     android:background="#78F3D7"
     android:backgroundTint="#E0F0E5"
     android:orientation="vertical"
-    tools:context=".FirstFragment">
+    tools:context=".ProfileFragment">
 
     <ImageView
         android:id="@+id/imageView"

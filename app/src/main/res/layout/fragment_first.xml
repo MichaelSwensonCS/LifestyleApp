@@ -9,7 +9,7 @@
     android:background="#78F3D7"
     android:backgroundTint="#E1FAF4"
     android:orientation="vertical"
-    tools:context=".FirstFragment">
+    tools:context=".ProfileFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"

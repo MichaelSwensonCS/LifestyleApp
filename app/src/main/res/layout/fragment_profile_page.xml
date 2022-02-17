@@ -9,7 +9,7 @@
     android:background="#78F3D7"
     android:backgroundTint="#DDDCD7"
     android:orientation="vertical"
-    tools:context=".FirstFragment">
+    tools:context=".ProfileFragment">
 
     <LinearLayout
         android:layout_width="370dp"
