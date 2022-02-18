@@ -46,9 +46,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     };
 
     private FragmentFirstBinding binding;
-    //TODO Move weight up near age to fill empty gap
-
-    Bitmap mThumbnailImage;
 
     //AppCompatButton submitButton;
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -74,23 +71,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         return binding.getRoot();
     }
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        boolean init = false;
-        // Create user
-        if (user == null) {
-            user = new User();
-            init = true;
-            // The radio buttons are on male by default
-            user.gender = "male";
-        }
-
-        AppCompatButton submitButton =(AppCompatButton) getActivity().findViewById(R.id.submitBtn);
+    public void init(boolean init) {
+        AppCompatButton submitButton = getActivity().findViewById(R.id.submitBtn);
         submitButton.setOnClickListener(this);
-
-        //This might be a problem
-        mDisplayIntent = new Intent(getActivity(),view.getClass());
 
         // Name
         name_first = getActivity().findViewById(R.id.userFirstName);
@@ -174,6 +157,21 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
         button = getActivity().findViewById(R.id.submitBtn);
         button.setOnClickListener(this);
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Create user
+        if (user == null) {
+            user = new User();
+            init(true);
+            // The radio buttons are on male by default
+            user.gender = "male";
+        } else init(false);
+
+        //This might be a problem
+        mDisplayIntent = new Intent(getActivity(), view.getClass());
     }
 
     @Override
@@ -273,8 +271,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                 // BMI = 703 × pounds/(inches)^2
                 if (saveInfo(true)){
                     // switch to another fragment
-                    NavHostFragment.findNavController(ProfileFragment.this)
-                            .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                    getActivity().setContentView(R.layout.fragment_profile_page);
+                    init(false);
                 }
                 break;
 
@@ -312,6 +310,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         }
     }
 
+    Bitmap mThumbnailImage;
     String currentPhotoPath;
     private String saveImage(Bitmap finalBitmap) {
         String APP_TAG = "LifestyleApp";
