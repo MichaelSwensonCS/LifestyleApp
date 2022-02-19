@@ -60,7 +60,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     private AutoCompleteTextView height_feet;
     private AutoCompleteTextView height_inch;
 
-    private static User user;
+    public static User user;
 
     @Override
     public View onCreateView(
@@ -71,6 +71,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         return binding.getRoot();
     }
 
+    // TODO: Replace getActivity()... with binding.(element_name)
     public void init(boolean init) {
         AppCompatButton submitButton = getActivity().findViewById(R.id.submitBtn);
         submitButton.setOnClickListener(this);
@@ -268,11 +269,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         switch(view.getId()){
 
             case R.id.submitBtn:
-                // BMI = 703 × pounds/(inches)^2
                 if (saveInfo(true)){
                     // switch to another fragment
-                    getActivity().setContentView(R.layout.fragment_profile_page);
-                    init(false);
+                    NavHostFragment.findNavController(ProfileFragment.this)
+                            .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                    // getActivity().setContentView(R.layout.fragment_profile_page);
+                    // init(false);
+                    // getActivity().getFragmentManager().popBackStack();
                 }
                 break;
 
