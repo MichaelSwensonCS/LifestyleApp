@@ -75,6 +75,11 @@ public class HomeFrag extends Fragment implements View.OnClickListener{
             case R.id.btn_Weather:
                 NavHostFragment.findNavController(HomeFrag.this).navigate(R.id.action_home_to_weather);
                 break;
+            case R.id.btn_Profile:
+                NavHostFragment.findNavController(HomeFrag.this).navigate(R.id.action_home_to_profile);
+                break;
+            case R.id.btn_FitReg:
+                break;
             default:
                 break;
         }
