@@ -8,21 +8,37 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.example.lifestyleapp.ProfileFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:label="Profile Page"
+        tools:layout="@layout/fragment_profile_page">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_profile_to_home"
+            app:destination="@id/HomeFrag" />
     </fragment>
+
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.lifestyleapp.SecondFragment"
+        android:id="@+id/HomeFrag"
+        android:name="com.example.lifestyleapp.HomeFrag"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_home_page">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/action_home_to_profile"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_home_to_weather"
+            app:destination="@id/weatherFrag"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/weatherFrag"
+        android:name="com.example.lifestyleapp.WeatherDisplay"
+        android:label="WeatherDisplay"
+        tools:layout="@layout/fragment_weather_display">
+
+        <action
+            android:id="@+id/action_home_to_profile"
+            app:destination="@id/HomeFrag" />
     </fragment>
 </navigation>
