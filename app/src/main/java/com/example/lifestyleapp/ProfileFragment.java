@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavHost;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.lifestyleapp.databinding.FragmentFirstBinding;
@@ -45,7 +46,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             "Salt Lake City","West Valley City","Provo", "Orem", "Ogden", "Park City"
     };
 
-    private FragmentFirstBinding binding;
+    private FragmentProfilePageBinding binding;
 
     //AppCompatButton submitButton;
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -67,7 +68,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        binding = FragmentProfilePageBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -75,6 +76,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     public void init(boolean init) {
         AppCompatButton submitButton = getActivity().findViewById(R.id.submitBtn);
         submitButton.setOnClickListener(this);
+
+        AppCompatButton btnHome = getActivity().findViewById(R.id.btn_home);
+        btnHome.setOnClickListener(this);
 
         // Name
         name_first = getActivity().findViewById(R.id.userFirstName);
@@ -171,8 +175,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             user.gender = "male";
         } else init(false);
 
-        //This might be a problem
         mDisplayIntent = new Intent(getActivity(), view.getClass());
+
+
     }
 
     @Override
@@ -278,7 +283,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                     // getActivity().getFragmentManager().popBackStack();
                 }
                 break;
-
+            case R.id.btn_home:
+                NavHostFragment.findNavController(ProfileFragment.this).navigate(R.id.action_profile_to_home);
+                break;
             case R.id.uploadPicture:
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if(cameraIntent.resolveActivity(getActivity().getPackageManager())!=null){

@@ -89,6 +89,14 @@
             android:id="@+id/btn_FitGoals"
             />
 
+        <Button
+            android:id="@+id/btn_Weather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:text="Weather In My Area" />
+
     </LinearLayout>
 
     <TextView

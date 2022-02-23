@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/weather_background"
+    android:orientation="vertical"
+    tools:context=".WeatherDisplay">
+
+    <!-- TODO: Update blank fragment layout -->
+
+        <TextView
+            android:id="@+id/tvweatherTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#AA0033AA"
+            android:gravity="center"
+            android:text="Weather"
+            android:textAlignment="center"
+            android:textColor="@color/material_on_primary_emphasis_high_type"
+            android:textSize="30sp"
+            />
+    <TextView
+        android:id="@+id/weatherCountryCityTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#BB0044FF"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Weather In Salt Lake City, US"
+        android:textAlignment="center"
+        android:textColor="@color/material_on_primary_emphasis_high_type"
+        android:textSize="30sp"
+        />
+
+    <TextView
+        android:id="@+id/weatherInformation"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_margin="40sp"
+        android:background="#AA0088AA"
+        android:gravity="center"
+        android:text="Place Holder"
+        android:textAlignment="center"
+        android:textColor="@color/material_on_primary_emphasis_high_type"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:text="Home"
+            android:id="@id/btn_home"
+            android:layout_weight="1"
+            android:backgroundTint="#FF9A03"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:text="Fitness"
+            android:id="@id/btn_Fitness"
+            android:layout_weight="1"
+            android:backgroundTint="#ADA1CE"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:text="Profile"
+            android:id="@id/btn_Profile"
+            android:layout_weight="1"
+            android:backgroundTint="#40C9C9"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="get Info" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
