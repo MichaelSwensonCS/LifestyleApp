@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:text="My Fitness Goals"
+            android:text="My Fitness Goal"
             android:backgroundTint="#01C6B2"
             android:id="@+id/btn_FitGoals"
             />
