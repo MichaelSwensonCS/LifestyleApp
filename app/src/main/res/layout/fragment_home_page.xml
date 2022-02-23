@@ -60,20 +60,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_weight="3"
         android:orientation="vertical"
         android:weightSum="6">
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:text="Select Fitness Regiment"
-            android:backgroundTint="#01C6B2"
-            android:id="@+id/btn_FitReg"
-            />
 
         <Button
             android:layout_width="match_parent"
@@ -90,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:text="My Fitness Goals"
+            android:text="My Fitness Goal"
             android:backgroundTint="#01C6B2"
             android:id="@+id/btn_FitGoals"
             />
