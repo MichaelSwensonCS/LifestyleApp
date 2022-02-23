@@ -16,8 +16,9 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_gravity="center_vertical"
-        tools:srcCompat="@tools:sample/avatars[3]" />
-
+        android:src="@drawable/home_page_pic"
+        tools:srcCompat="@tools:sample/avatars[3]"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,9 +43,8 @@
             android:layout_height="100dp"
             android:layout_gravity="right"
             android:layout_weight="3"
-            tools:srcCompat="@tools:sample/avatars[2]" />
-
-
+            tools:srcCompat="@tools:sample/avatars[2]"
+            />
     </LinearLayout>
 
     <TextView
@@ -69,6 +69,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:text="Select Fitness Regiment"
+            android:backgroundTint="#01C6B2"
             android:id="@+id/btn_FitReg"
             />
 
@@ -78,6 +79,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:text="Calculate BMI"
+            android:backgroundTint="#01C6B2"
             android:id="@+id/btn_CalcBmi"
             />
 
@@ -87,6 +89,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:text="My Fitness Goals"
+            android:backgroundTint="#01C6B2"
             android:id="@+id/btn_FitGoals"
             />
 
@@ -96,7 +99,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:text="Weather In My Area" />
+            android:text="Weather In My Area"
+            android:backgroundTint="#01C6B2"
+            />
 
     </LinearLayout>
 
@@ -122,6 +127,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:text="Find Nice Hike"
+            android:backgroundTint="#01C6B2"
             android:id="@+id/btn_FindHike"
             />
 

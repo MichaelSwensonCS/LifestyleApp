@@ -7,9 +7,18 @@
     android:layout_centerHorizontal="true"
     android:layout_margin="20dp"
     android:background="#78F3D7"
-    android:backgroundTint="#DDDCD7"
+    android:backgroundTint="#C3EEEE"
     android:orientation="vertical"
     tools:context=".SecondFragment">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/fitness_page_pic"
+        tools:srcCompat="@tools:sample/avatars[3]"
+        />
 
     <TextView
         android:id="@+id/textview_second"
