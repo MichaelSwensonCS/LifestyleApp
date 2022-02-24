@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this,  R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-        //ProfileFragment profilePopup = new ProfileFragment();
-        //profilePopup.setCancelable(false);
-        //profilePopup.show(getSupportFragmentManager(), null);
+        ProfileFragment profilePopup = new ProfileFragment();
+        profilePopup.setCancelable(false);
+        profilePopup.show(getSupportFragmentManager(), null);
     }
 }

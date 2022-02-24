@@ -90,8 +90,6 @@ public class WeatherDisplay extends Fragment implements View.OnClickListener{
         getData.setOnClickListener(this);
     }
 
-
-
     @Override
     public void onClick(View view) {
         switch (view.getId()){

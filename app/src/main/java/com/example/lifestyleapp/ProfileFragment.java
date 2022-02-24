@@ -24,6 +24,9 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.annotation.Nullable;
 
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+
+import com.example.lifestyleapp.databinding.FragmentInitialProfileBinding;
 import com.example.lifestyleapp.databinding.FragmentProfilePageBinding;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -44,20 +47,18 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
             "Salt Lake City","West Valley City","Provo", "Orem", "Ogden", "Park City"
     };
 
-    private FragmentProfilePageBinding binding;
+    private FragmentInitialProfileBinding binding;
 
-    //AppCompatButton submitButton;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    Intent mDisplayIntent;
-
+    // TODO: move this to somewhere more permanent
     public static User user;
+    public static ArrayList<User> users;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        binding = FragmentProfilePageBinding.inflate(inflater, container, false);
+        binding = FragmentInitialProfileBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -139,18 +140,23 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        if (users == null)
+            users = new ArrayList<User>();
+
         // Create user
         if (user == null) {
             user = new User();
             init(true);
             // The radio buttons are on male by default
             user.gender = "male";
+            users.add(user);
         } else init(false);
 
         mDisplayIntent = new Intent(getActivity(), view.getClass());
     }
 
-    @Override
+    /*@Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder db = new AlertDialog.Builder(getActivity());
         db.setView(getLayoutInflater().inflate(R.layout.fragment_initial_profile, null));
@@ -159,7 +165,7 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
         ad.setCanceledOnTouchOutside(false);
         ad.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         return ad;
-    }
+    }*/
 
     @Override
     public void onDestroyView() {
@@ -167,21 +173,16 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
         binding = null;
     }
 
-    private void showToast(String msg, int duration) {
-        Toast toast = Toast.makeText(getContext(), msg, duration);
-        toast.show();
-    }
-
     private boolean saveInfo(boolean validate) {
         // Pull name
         if (!validate || !binding.userFirstName.getText().toString().isEmpty()) user.firstname = binding.userFirstName.getText().toString();
         else {
-            showToast("First name cannot be empty", Toast.LENGTH_SHORT);
+            Toast.makeText(getContext(),"First name cannot be empty", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (!validate || !binding.userLastName.getText().toString().isEmpty()) user.lastname = binding.userLastName.getText().toString();
         else {
-            showToast("Last name cannot be empty", Toast.LENGTH_SHORT);
+            Toast.makeText(getContext(),"Last name cannot be empty", Toast.LENGTH_SHORT).show();
             return false;
         }
 
@@ -195,7 +196,7 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
         catch (final NumberFormatException e) {
             if (!validate) user.age = -1;
             else {
-                showToast("Invalid age", Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(),"Invalid age", Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
@@ -210,7 +211,7 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
         catch (final NumberFormatException e) {
             if (!validate) user.weight = -1;
             else {
-                showToast("Invalid weight", Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(),"Invalid weight", Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
@@ -229,7 +230,7 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
         catch (final NumberFormatException e) {
             if (!validate) user.heightfeet = -1;
             else {
-                showToast("Invalid height", Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(),"Invalid height", Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
@@ -243,7 +244,7 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
         catch (final NumberFormatException e) {
             if (!validate) user.heightinches = -1;
             else {
-                showToast("Invalid height", Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(),"Invalid height", Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
@@ -256,12 +257,10 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
 
             case R.id.submitBtn:
                 if (saveInfo(true)){
-                    // switch to another fragment
-                    /*NavHostFragment.findNavController(ProfileFragment.this)
-                            .navigate(R.id.action_FirstFragment_to_FitnessReg);*/
-                    // getActivity().setContentView(R.layout.fragment_profile_page);
-                    // init(false);
-                    // getActivity().getFragmentManager().popBackStack();
+                    HomeFragment.updateInfo();
+                    Toast.makeText(getContext(), "Info saved", Toast.LENGTH_SHORT).show();
+                    if (getDialog() != null)
+                        getDialog().dismiss();
                 }
                 break;
             case R.id.uploadPicture:
@@ -275,6 +274,10 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
                 break;
         }
     }
+
+    // TODO: save photo somewhere temporary and only override user when submit button is hit
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    Intent mDisplayIntent;
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode==REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){

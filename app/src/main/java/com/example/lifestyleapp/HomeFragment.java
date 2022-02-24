@@ -8,12 +8,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.lifestyleapp.databinding.FragmentHomePageBinding;
 
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
-    private FragmentHomePageBinding binding;
+    private static FragmentHomePageBinding binding;
 
     @Override
     public View onCreateView(
@@ -25,9 +26,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         return binding.getRoot();
     }
 
+    public static void updateInfo() {
+        User user = ProfileFragment.user;
+        if(binding != null && user != null)
+            binding.tvWelcome.setText("Welcome " + user.firstname + " " + user.lastname);
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        updateInfo();
         binding.btnCalcBmi.setOnClickListener(this);
+        binding.btnWeather.setOnClickListener(this);
     }
 
     @Override
@@ -50,6 +60,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                     toast = Toast.makeText(getContext(), "BMI: " +
                             703 * user.weight/Math.pow(user.heightfeet*12 + user.heightinches,2),  Toast.LENGTH_LONG);
                 toast.show();
+                break;
+
+            case R.id.btn_Weather:
+                NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_homeFragment_to_weatherDisplay);
                 break;
         }
     }
