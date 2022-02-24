@@ -5,18 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerHorizontal="true"
+    android:layout_margin="20dp"
     android:background="#78F3D7"
     android:backgroundTint="#E0F0E5"
     android:orientation="vertical"
-    tools:context=".HomeFragment">
+    tools:context=".ProfileFragment">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_gravity="center_vertical"
-        tools:srcCompat="@tools:sample/avatars[3]" />
-
+        android:src="@drawable/home_page_pic"
+        tools:srcCompat="@tools:sample/avatars[3]"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,6 +30,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text="Welcome (user)"
             android:id="@+id/tv_welcome"
             android:layout_alignParentTop="true"
@@ -41,14 +44,14 @@
             android:layout_height="100dp"
             android:layout_gravity="right"
             android:layout_weight="3"
-            tools:srcCompat="@tools:sample/avatars[2]" />
-
-
+            tools:srcCompat="@tools:sample/avatars[2]"
+            />
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
         android:text="My Lifestyle"
         android:id="@+id/tv_MyLifestyle"
         android:layout_alignParentTop="true"
@@ -57,7 +60,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_weight="3"
         android:orientation="vertical"
         android:weightSum="6">
@@ -67,16 +70,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:text="Select Fitness Regiment"
-            android:id="@+id/btn_FitReg"
-            />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
             android:text="Calculate BMI"
+            android:backgroundTint="#01C6B2"
             android:id="@+id/btn_CalcBmi"
             />
 
@@ -85,7 +80,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:text="My Fitness Goals"
+            android:text="My Fitness Goal"
+            android:backgroundTint="#01C6B2"
             android:id="@+id/btn_FitGoals"
             />
 
@@ -95,30 +91,41 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:text="Weather In My Area" />
+            android:text="Weather In My Area"
+            android:backgroundTint="#01C6B2"
+            />
 
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
         android:text="Find Hike"
         android:id="@+id/tv_FindHike"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         />
 
-
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:text="Find Nice Hike"
-        android:id="@+id/btn_FindHike"
-        />
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:weightSum="6">
 
-    <!--
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:text="Find Nice Hike"
+            android:backgroundTint="#01C6B2"
+            android:id="@+id/btn_FindHike"
+            />
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="10dp"
@@ -158,6 +165,7 @@
             android:layout_weight="1"
             android:backgroundTint="#40C9C9"
             />
-    </LinearLayout> -->
+
+    </LinearLayout>
 
 </LinearLayout>

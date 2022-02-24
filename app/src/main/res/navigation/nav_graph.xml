@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/HomeFrag">
 
     <fragment
         android:id="@+id/FirstFragment"
@@ -14,12 +14,16 @@
         <action
             android:id="@+id/action_profile_to_home"
             app:destination="@id/HomeFrag" />
+        <action
+            android:id="@+id/action_FirstFragment_to_FitnessReg"
+            app:destination="@id/FitnessReg"
+            app:enterAnim="@anim/fragment_fade_enter" />
     </fragment>
 
     <fragment
         android:id="@+id/HomeFrag"
         android:name="com.example.lifestyleapp.HomeFrag"
-        android:label="@string/second_fragment_label"
+        android:label="ProfileFrag"
         tools:layout="@layout/fragment_home_page">
 
         <action
@@ -29,6 +33,24 @@
             android:id="@+id/action_home_to_weather"
             app:destination="@id/weatherFrag"
             />
+        <action
+            android:id="@+id/action_HomeFrag_to_FitnessReg"
+            app:destination="@id/FitnessReg"
+            app:enterAnim="@anim/fragment_fade_enter" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/FitnessReg"
+        android:name="com.example.lifestyleapp.SecondFragment"
+        android:label="FitnessReg"
+        tools:layout="@layout/fragment_fitness_page">
+
+        <action
+            android:id="@+id/action_fitness_to_home"
+            app:destination="@id/HomeFrag" />
+        <action
+            android:id="@+id/action_FitnessReg_to_Profile"
+            app:destination="@id/FirstFragment" />
     </fragment>
 
     <fragment
@@ -38,7 +60,7 @@
         tools:layout="@layout/fragment_weather_display">
 
         <action
-            android:id="@+id/action_home_to_profile"
+            android:id="@+id/action_weather_to_home"
             app:destination="@id/HomeFrag" />
     </fragment>
 </navigation>

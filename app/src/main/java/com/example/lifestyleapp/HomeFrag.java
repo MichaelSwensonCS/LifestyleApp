@@ -26,6 +26,9 @@ public class HomeFrag extends Fragment implements View.OnClickListener{
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     Button toWeather;
+    Button toFitness;
+    Button toProfile;
+    Button toFitGoals;
     // TODO: Rename and change types of parameters
 
 
@@ -67,6 +70,15 @@ public class HomeFrag extends Fragment implements View.OnClickListener{
 
         toWeather = (Button) getActivity().findViewById(R.id.btn_Weather);
         toWeather.setOnClickListener(this);
+
+        toProfile = (Button)  getActivity().findViewById(R.id.btn_Profile);
+        toProfile.setOnClickListener(this);
+
+        toFitness = (Button) getActivity().findViewById(R.id.btn_Fitness);
+        toFitness.setOnClickListener(this);
+
+        toFitGoals = (Button) getActivity().findViewById(R.id.btn_FitGoals);
+        toFitGoals.setOnClickListener(this);
     }
     @Override
     public void onClick(View view) {
@@ -74,6 +86,13 @@ public class HomeFrag extends Fragment implements View.OnClickListener{
 
             case R.id.btn_Weather:
                 NavHostFragment.findNavController(HomeFrag.this).navigate(R.id.action_home_to_weather);
+                break;
+            case R.id.btn_Profile:
+                NavHostFragment.findNavController(HomeFrag.this).navigate(R.id.action_home_to_profile);
+                break;
+            case R.id.btn_Fitness:
+            case R.id.btn_FitGoals:
+                NavHostFragment.findNavController(HomeFrag.this).navigate(R.id.action_HomeFrag_to_FitnessReg);
                 break;
             default:
                 break;
