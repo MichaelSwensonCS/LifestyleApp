@@ -5,11 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerHorizontal="true"
-    android:layout_margin="20dp"
     android:background="#78F3D7"
     android:backgroundTint="#D7FFFD"
     android:orientation="vertical"
-    tools:context=".SecondFragment">
+    tools:context=".FitnessFragment">
 
     <ImageView
         android:id="@+id/imageView"

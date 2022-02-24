@@ -8,12 +8,10 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.lifestyleapp.databinding.FragmentFitnessPageBinding;
-import com.example.lifestyleapp.databinding.FragmentProfilePageBinding;
 
-public class SecondFragment extends Fragment implements View.OnClickListener {
+public class FitnessFragment extends Fragment implements View.OnClickListener {
     Button home;
     Button profile;
     Button submit;
@@ -45,11 +43,11 @@ public class SecondFragment extends Fragment implements View.OnClickListener {
             switch(view.getId()){
 
                 case R.id.btn_homeFitness:
-                    NavHostFragment.findNavController(SecondFragment.this).navigate(R.id.action_fitness_to_home);
+                    // NavHostFragment.findNavController(FitnessFragment.this).navigate(R.id.action_fitness_to_home);
                     break;
 
                 case R.id.btn_ProfileFitness:
-                    NavHostFragment.findNavController(SecondFragment.this).navigate(R.id.action_FitnessReg_to_Profile);
+                    // NavHostFragment.findNavController(FitnessFragment.this).navigate(R.id.action_FitnessReg_to_Profile);
                     break;
                 case R.id.btn_CalcBMR:
                     //TODO CALC BMR

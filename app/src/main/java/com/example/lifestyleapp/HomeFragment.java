@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 Toast toast;
                 User user = ProfileFragment.user;
                 // BMI = 703 × pounds/(inches)^2
-                if (user.heightinches < 0 || user.heightfeet < 0 || user.weight < 0)
+                if (user == null || user.heightinches < 0 || user.heightfeet < 0 || user.weight < 0)
                     toast = Toast.makeText(getContext(), "Profile info is incomplete.", Toast.LENGTH_LONG);
                 else
                     toast = Toast.makeText(getContext(), "BMI: " +

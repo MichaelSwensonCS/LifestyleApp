@@ -7,12 +7,14 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
-import com.example.lifestyleapp.databinding.FragmentNavigationBinding;
 
 public class NavigationFragment extends Fragment implements View.OnClickListener{
+    @Override
+    public void onClick(View view) {
 
+    }
+
+    /*
     private FragmentNavigationBinding binding;
 
     @Override
@@ -41,8 +43,8 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-        /*NavHostFragment.findNavController(SecondFragment.this)
-            .navigate(R.id.action_SecondFragment_to_FirstFragment);*/
+        NavHostFragment.findNavController(SecondFragment.this)
+            .navigate(R.id.action_SecondFragment_to_FirstFragment);
         switch (view.getId()) {
             case R.id.btn_home:
                 binding.contentMain.setDisplayedChild(0);
@@ -51,5 +53,5 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
                 binding.contentMain.setDisplayedChild(1);
                 break;
         }
-    }
+    } */
 }
