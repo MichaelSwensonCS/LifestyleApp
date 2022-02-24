@@ -33,13 +33,17 @@
             android:id="@+id/action_home_to_weather"
             app:destination="@id/weatherFrag"
             />
+        <action
+            android:id="@+id/action_HomeFrag_to_FitnessReg"
+            app:destination="@id/FitnessReg"
+            app:enterAnim="@anim/fragment_fade_enter" />
     </fragment>
 
     <fragment
         android:id="@+id/FitnessReg"
         android:name="com.example.lifestyleapp.SecondFragment"
         android:label="FitnessReg"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_fitness_page">
 
         <action
             android:id="@+id/action_fitness_to_home"

@@ -17,7 +17,7 @@
         android:layout_height="150dp"
         android:layout_gravity="center_vertical"
         android:src="@drawable/fitness_page_pic"
-        tools:srcCompat="@tools:sample/avatars[3]"
+        tools:srcCompat="@mipmap/default_alpaca_round"
         />
 
     <TextView
@@ -205,11 +205,12 @@
         android:layout_height="10dp"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:weightSum="3">
+        android:weightSum="2"
+        android:gravity="bottom">
 
 
         <Button
-            android:id="@id/btn_home"
+            android:id="@+id/btn_homeFitness"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -223,19 +224,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:text="Fitness"
-            android:id="@+id/btn_Fitness"
-            android:layout_weight="1"
-            android:backgroundTint="#ADA1CE"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
             android:text="Profile"
-            android:id="@+id/btn_Profile"
+            android:id="@+id/btn_ProfileFitness"
             android:layout_weight="1"
             android:backgroundTint="#40C9C9"
             />
