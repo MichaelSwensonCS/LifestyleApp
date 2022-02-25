@@ -17,26 +17,24 @@
         android:layout_height="150dp"
         android:layout_gravity="center_vertical"
         android:src="@drawable/home_page_pic"
-        tools:srcCompat="@tools:sample/avatars[3]"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="74dp"
         android:layout_weight="1"
         android:orientation="horizontal"
         android:weightSum="5">
 
         <TextView
+            android:id="@+id/tv_welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="Welcome (user)"
-            android:id="@+id/tv_welcome"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:layout_weight="2"
-            />
+            android:text="Welcome (user)"
+            android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/iv_weather"
@@ -44,8 +42,7 @@
             android:layout_height="100dp"
             android:layout_gravity="right"
             android:layout_weight="3"
-            tools:srcCompat="@tools:sample/avatars[2]"
-            />
+            tools:srcCompat="@drawable/default_alpaca_background" />
     </LinearLayout>
 
     <TextView
@@ -109,23 +106,23 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="110dp"
         android:layout_weight="1"
         android:orientation="vertical"
         android:weightSum="6">
 
         <Button
+            android:id="@+id/btn_FindHike"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:text="Find Nice Hike"
             android:backgroundTint="#01C6B2"
-            android:id="@+id/btn_FindHike"
-            />
+            android:text="Find Nice Hike" />
 
     </LinearLayout>
 
+    // task bar
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="10dp"
