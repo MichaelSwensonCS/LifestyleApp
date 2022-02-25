@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerHorizontal="true"
-    android:layout_margin="20dp"
     android:background="#78F3D7"
     android:backgroundTint="#E1FAF4"
     android:orientation="vertical"
@@ -61,9 +60,8 @@
 
             <AutoCompleteTextView
                 android:id="@+id/ageDropDown"
-                android:layout_width="match_parent"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Age:"
                 android:textSize="14sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,15 +71,13 @@
             android:layout_margin="14dp"
             android:layout_marginTop="20dp"
             android:background="@android:color/transparent"
-            android:layout_weight="1"
             app:boxBackgroundColor="@android:color/transparent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/userWeight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Weight:"
+                android:hint="Weight"
                 android:textSize="14sp" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
@@ -111,7 +107,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Feet:"
                 android:textSize="12sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,7 +125,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Inches:"
                 android:textSize="12sp" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
@@ -158,7 +152,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="City:"
                 android:textSize="12sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -178,7 +171,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Country:"
                 android:textSize="12sp" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
@@ -204,7 +196,7 @@
         <TextView
             android:id="@+id/genderDisclaimer"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_weight="1"
             android:layout_marginTop="-15dp"
             android:gravity="center_vertical"

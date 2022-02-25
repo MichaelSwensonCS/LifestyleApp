@@ -7,12 +7,12 @@ import com.google.gson.Gson;
 public class User {
     public String firstname;
     public String lastname;
-    public int age;
-    public int weight;
+    public int age = -1;
+    public int weight = -1;
     public String country;
     public String city;
-    public int heightinches;
-    public int heightfeet;
+    public int heightinches = -1;
+    public int heightfeet = -1;
     public String gender;
 
     // TODO: Serialize image

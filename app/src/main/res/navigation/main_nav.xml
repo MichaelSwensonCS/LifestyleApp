@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/fitnessFragment"
+        android:name="com.example.lifestyleapp.FitnessFragment"
+        android:label="fragment_fitness_page"
+        tools:layout="@layout/fragment_fitness_page" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.lifestyleapp.ProfileListFragment"
+        android:label="fragment_profile_page"
+        tools:layout="@layout/fragment_profile_list" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.lifestyleapp.HomeFragment"
+        android:label="fragment_home_page"
+        tools:layout="@layout/fragment_home_page" >
+        <action
+            android:id="@+id/action_homeFragment_to_weatherDisplay"
+            app:destination="@id/weatherDisplay" />
+    </fragment>
+    <fragment
+        android:id="@+id/weatherDisplay"
+        android:name="com.example.lifestyleapp.WeatherDisplay"
+        android:label="fragment_weather_display"
+        tools:layout="@layout/fragment_weather_display" >
+        <action
+            android:id="@+id/action_weatherDisplay_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+</navigation>

@@ -1,14 +1,17 @@
 package com.example.lifestyleapp;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -16,16 +19,14 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.annotation.Nullable;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavHost;
-import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.lifestyleapp.databinding.FragmentFirstBinding;
+import com.example.lifestyleapp.databinding.FragmentInitialProfileBinding;
 import com.example.lifestyleapp.databinding.FragmentProfilePageBinding;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -36,7 +37,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ProfileFragment extends Fragment implements View.OnClickListener{
+public class ProfileFragment extends DialogFragment implements View.OnClickListener{
 
     private static final String[] COUNTRIES = new String[] {
             "United States","Canada","Mexico"
@@ -46,45 +47,26 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             "Salt Lake City","West Valley City","Provo", "Orem", "Ogden", "Park City"
     };
 
-    private FragmentProfilePageBinding binding;
+    private FragmentInitialProfileBinding binding;
 
-    //AppCompatButton submitButton;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    Intent mDisplayIntent;
-
-    private TextInputEditText name_first;
-    private TextInputEditText name_last;
-    private AutoCompleteTextView age;
-    private TextInputEditText weight;
-    private AutoCompleteTextView city;
-    private AutoCompleteTextView country;
-    private AutoCompleteTextView height_feet;
-    private AutoCompleteTextView height_inch;
-
+    // TODO: move this to somewhere more permanent
     public static User user;
+    public static ArrayList<User> users;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        binding = FragmentProfilePageBinding.inflate(inflater, container, false);
+        binding = FragmentInitialProfileBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
-    // TODO: Replace getActivity()... with binding.(element_name)
     public void init(boolean init) {
-        AppCompatButton submitButton = getActivity().findViewById(R.id.submitBtn);
-        submitButton.setOnClickListener(this);
-
-        AppCompatButton btnHome = getActivity().findViewById(R.id.btn_home);
-        btnHome.setOnClickListener(this);
 
         // Name
-        name_first = getActivity().findViewById(R.id.userFirstName);
-        name_first.setText(init ? "" : user.firstname);
-        name_last = getActivity().findViewById(R.id.userLastName);
-        name_last.setText(init ? "" : user.lastname);
+        binding.userFirstName.setText(init ? "" : user.firstname);
+        binding.userLastName.setText(init ? "" : user.lastname);
 
         // Age
         List ages = new ArrayList<Integer>();
@@ -94,27 +76,23 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         ArrayAdapter<Integer> agesAdapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_spinner_item, ages);
         agesAdapter.setDropDownViewResource( android.R.layout.simple_spinner_item );
 
-        age = getActivity().findViewById(R.id.ageDropDown);
-        age.setText(init || user.age < 0 ? "" : "" + user.age);
-        age.setAdapter(agesAdapter);
+        binding.ageDropDown.setText(init || user.age < 0 ? "" : "" + user.age);
+        binding.ageDropDown.setAdapter(agesAdapter);
 
         // Weight
-        weight = getActivity().findViewById(R.id.userWeight);
-        weight.setText(init || user.weight < 0 ? "" : "" + user.weight);
+        binding.userWeight.setText(init || user.weight < 0 ? "" : "" + user.weight);
 
         //City autocomplete
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_1, CITIES);
-        city = getActivity().findViewById(R.id.cityAuto);
-        city.setText(init ? "" : user.city);
-        city.setAdapter(adapter);
+        binding.cityAuto.setText(init ? "" : user.city);
+        binding.cityAuto.setAdapter(adapter);
 
         // Country
         ArrayAdapter<String> countriesAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_1, COUNTRIES);
-        country = getActivity().findViewById(R.id.countryAuto);
-        country.setText(init ? "" : user.country);
-        country.setAdapter(countriesAdapter);
+        binding.countryAuto.setText(init ? "" : user.country);
+        binding.countryAuto.setAdapter(countriesAdapter);
 
         // Height
         List heights_feet = new ArrayList<Integer>();
@@ -124,9 +102,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         ArrayAdapter<Integer> feetAdapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_spinner_item, heights_feet);
         feetAdapter.setDropDownViewResource( android.R.layout.simple_spinner_item );
 
-        height_feet = getActivity().findViewById(R.id.feetAuto);
-        height_feet.setText(init || user.heightfeet < 0 ? "" : "" + user.heightfeet);
-        height_feet.setAdapter(feetAdapter);
+        binding.feetAuto.setText(init || user.heightfeet < 0 ? "" : "" + user.heightfeet);
+        binding.feetAuto.setAdapter(feetAdapter);
 
         List heights_inch = new ArrayList<Integer>();
         for(int i = 0; i <= 11; i++){
@@ -135,9 +112,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         ArrayAdapter<Integer> inchAdapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_spinner_item, heights_inch);
         inchAdapter.setDropDownViewResource( android.R.layout.simple_spinner_item );
 
-        height_inch = getActivity().findViewById(R.id.inchesAuto);
-        height_inch.setText(init || user.heightinches < 0 ? "" : "" + user.heightinches);
-        height_inch.setAdapter(inchAdapter);
+        binding.inchesAuto.setText(init || user.heightinches < 0 ? "" : "" + user.heightinches);
+        binding.inchesAuto.setAdapter(inchAdapter);
 
         // Sex
         RadioGroup radioGroup = getActivity().findViewById(R.id.radioSexGroup);
@@ -157,15 +133,16 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         });
 
         // Bind click listener to buttons
-        AppCompatButton button = getActivity().findViewById(R.id.uploadPicture);
-        button.setOnClickListener(this);
-
-        button = getActivity().findViewById(R.id.submitBtn);
-        button.setOnClickListener(this);
+        binding.uploadPicture.setOnClickListener(this);
+        binding.submitBtn.setOnClickListener(this);
     }
 
+    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        if (users == null)
+            users = new ArrayList<User>();
 
         // Create user
         if (user == null) {
@@ -173,12 +150,22 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             init(true);
             // The radio buttons are on male by default
             user.gender = "male";
+            users.add(user);
         } else init(false);
 
         mDisplayIntent = new Intent(getActivity(), view.getClass());
-
-
     }
+
+    /*@Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder db = new AlertDialog.Builder(getActivity());
+        db.setView(getLayoutInflater().inflate(R.layout.fragment_initial_profile, null));
+        AlertDialog ad = db.create();
+        ad.setCancelable(false);
+        ad.setCanceledOnTouchOutside(false);
+        ad.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        return ad;
+    }*/
 
     @Override
     public void onDestroyView() {
@@ -186,83 +173,78 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         binding = null;
     }
 
-    private void showToast(String msg, int duration) {
-        Toast toast = Toast.makeText(getContext(), msg, duration);
-        toast.show();
-    }
-
     private boolean saveInfo(boolean validate) {
         // Pull name
-        if (!validate || !name_first.getText().toString().isEmpty()) user.firstname = name_first.getText().toString();
+        if (!validate || !binding.userFirstName.getText().toString().isEmpty()) user.firstname = binding.userFirstName.getText().toString();
         else {
-            showToast("First name cannot be empty", Toast.LENGTH_SHORT);
+            Toast.makeText(getContext(),"First name cannot be empty", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (!validate || !name_last.getText().toString().isEmpty()) user.lastname = name_last.getText().toString();
+        if (!validate || !binding.userLastName.getText().toString().isEmpty()) user.lastname = binding.userLastName.getText().toString();
         else {
-            showToast("Last name cannot be empty", Toast.LENGTH_SHORT);
+            Toast.makeText(getContext(),"Last name cannot be empty", Toast.LENGTH_SHORT).show();
             return false;
         }
 
         // Parse age
-        if (age.getText().toString().isEmpty()) user.age = -1;
+        if (binding.ageDropDown.getText().toString().isEmpty()) user.age = -1;
         else try {
-            int years = Integer.parseInt(age.getText().toString());
+            int years = Integer.parseInt(binding.ageDropDown.getText().toString());
             if (years < 0) throw new NumberFormatException();
             user.age = years;
         }
         catch (final NumberFormatException e) {
             if (!validate) user.age = -1;
             else {
-                showToast("Invalid age", Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(),"Invalid age", Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
 
         // Parse weight
-        if (weight.getText().toString().isEmpty()) user.weight = -1;
+        if (binding.userWeight.getText().toString().isEmpty()) user.weight = -1;
         else try {
-            int pounds = Integer.parseInt(weight.getText().toString());
+            int pounds = Integer.parseInt(binding.userWeight.getText().toString());
             if (pounds < 0) throw new NumberFormatException();
             user.weight = pounds;
         }
         catch (final NumberFormatException e) {
             if (!validate) user.weight = -1;
             else {
-                showToast("Invalid weight", Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(),"Invalid weight", Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
 
         // Pull city and country
-        user.country = country.getText().toString();
-        user.city = city.getText().toString();
+        user.country = binding.countryAuto.getText().toString();
+        user.city = binding.cityAuto.getText().toString();
 
         // Parse height
-        if (height_feet.getText().toString().isEmpty()) user.heightfeet = -1;
+        if (binding.feetAuto.getText().toString().isEmpty()) user.heightfeet = -1;
         else try {
-            int height = Integer.parseInt(height_feet.getText().toString());
+            int height = Integer.parseInt(binding.feetAuto.getText().toString());
             if (height < 0) throw new NumberFormatException();
             user.heightfeet = height;
         }
         catch (final NumberFormatException e) {
             if (!validate) user.heightfeet = -1;
             else {
-                showToast("Invalid height", Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(),"Invalid height", Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
 
-        if (height_inch.getText().toString().isEmpty()) user.heightinches = -1;
+        if (binding.inchesAuto.getText().toString().isEmpty()) user.heightinches = -1;
         else try {
-            int height = Integer.parseInt(height_inch.getText().toString());
+            int height = Integer.parseInt(binding.inchesAuto.getText().toString());
             if (height < 0) throw new NumberFormatException();
             user.heightinches = height;
         }
         catch (final NumberFormatException e) {
             if (!validate) user.heightinches = -1;
             else {
-                showToast("Invalid height", Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(),"Invalid height", Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
@@ -275,16 +257,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
             case R.id.submitBtn:
                 if (saveInfo(true)){
-                    // switch to another fragment
-                    NavHostFragment.findNavController(ProfileFragment.this)
-                            .navigate(R.id.action_FirstFragment_to_SecondFragment);
-                    // getActivity().setContentView(R.layout.fragment_profile_page);
-                    // init(false);
-                    // getActivity().getFragmentManager().popBackStack();
+                    HomeFragment.updateInfo();
+                    Toast.makeText(getContext(), "Info saved", Toast.LENGTH_SHORT).show();
+                    if (getDialog() != null)
+                        getDialog().dismiss();
                 }
-                break;
-            case R.id.btn_home:
-                NavHostFragment.findNavController(ProfileFragment.this).navigate(R.id.action_profile_to_home);
                 break;
             case R.id.uploadPicture:
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -297,6 +274,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                 break;
         }
     }
+
+    // TODO: save photo somewhere temporary and only override user when submit button is hit
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    Intent mDisplayIntent;
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode==REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
