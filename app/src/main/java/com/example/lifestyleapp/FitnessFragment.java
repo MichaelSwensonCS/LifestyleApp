@@ -12,9 +12,6 @@ import androidx.fragment.app.Fragment;
 import com.example.lifestyleapp.databinding.FragmentFitnessPageBinding;
 
 public class FitnessFragment extends Fragment implements View.OnClickListener {
-    Button home;
-    Button profile;
-    Button submit;
 
     private FragmentFitnessPageBinding binding;
 
@@ -31,24 +28,12 @@ public class FitnessFragment extends Fragment implements View.OnClickListener {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        home = (Button) getActivity().findViewById(R.id.btn_homeFitness);
-        home.setOnClickListener(this);
-
-        profile = (Button) getActivity().findViewById(R.id.btn_ProfileFitness);
-        profile.setOnClickListener(this);
 
     }
         @Override
         public void onClick(View view) {
             switch(view.getId()){
 
-                case R.id.btn_homeFitness:
-                    // NavHostFragment.findNavController(FitnessFragment.this).navigate(R.id.action_fitness_to_home);
-                    break;
-
-                case R.id.btn_ProfileFitness:
-                    // NavHostFragment.findNavController(FitnessFragment.this).navigate(R.id.action_FitnessReg_to_Profile);
-                    break;
                 case R.id.btn_CalcBMR:
                     //TODO CALC BMR
                     break;
