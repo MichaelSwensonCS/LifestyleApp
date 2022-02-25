@@ -11,9 +11,9 @@
         tools:layout="@layout/fragment_fitness_page" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.lifestyleapp.ProfileFragment"
+        android:name="com.example.lifestyleapp.ProfileListFragment"
         android:label="fragment_profile_page"
-        tools:layout="@layout/fragment_profile_page" />
+        tools:layout="@layout/fragment_profile_list" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.lifestyleapp.HomeFragment"
