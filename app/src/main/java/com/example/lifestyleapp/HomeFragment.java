@@ -1,5 +1,7 @@
 package com.example.lifestyleapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +38,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         updateInfo();
+        binding.btnFindHike.setOnClickListener(this);
         binding.btnCalcBmi.setOnClickListener(this);
         binding.btnWeather.setOnClickListener(this);
     }
@@ -65,6 +68,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             case R.id.btn_Weather:
                 NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_homeFragment_to_weatherDisplay);
                 break;
+            case R.id.btn_FindHike:
+                findHikes();
+                break;
         }
+    }
+
+    private void findHikes() {
+        Uri gmmIntentUri = Uri.parse("geo:0,0?q=hikes");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
+
     }
 }
