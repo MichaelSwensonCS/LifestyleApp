@@ -33,16 +33,17 @@ import java.text.DecimalFormat;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link WeatherDisplay#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class WeatherDisplay extends Fragment implements View.OnClickListener{
+public class WeatherDisplay extends Fragment{
 
     StringBuilder sb = new StringBuilder();
     TextView weather;
-    Button getData;
+    TextView title;
 
 
     private final String url = "https://api.openweathermap.org/data/2.5/weather";
@@ -85,23 +86,16 @@ public class WeatherDisplay extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         weather = (TextView) getActivity().findViewById(R.id.weatherInformation);
+        title = (TextView) getActivity().findViewById(R.id.weatherCountryCityTitle);
+        getWeatherDetails(view);
 
-        getData = (Button) getActivity().findViewById(R.id.test);
-        getData.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.test:
-                getWeatherDetails(view);
-            break;
-        }
-    }
     public void getWeatherDetails(View view) {
         String tempUrl = "";
-        String city = "Salt Lake City";//etCity.getText().toString().trim();
+        String city = ProfileFragment.user.city;//etCity.getText().toString().trim();
         String country = "";// etCountry.getText().toString().trim();
+        title.setText("Weather Report for: " + city);
         if(city.equals("")){
             //tvResult.setText("City field can not be empty!");
         }else{

@@ -21,35 +21,30 @@
             android:textColor="@color/material_on_primary_emphasis_high_type"
             android:textSize="30sp"
             />
+
     <TextView
         android:id="@+id/weatherCountryCityTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="#BB0044FF"
         android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:text="Weather In Salt Lake City, US"
+        android:text=""
         android:textAlignment="center"
         android:textColor="@color/material_on_primary_emphasis_high_type"
-        android:textSize="30sp"
-        />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/weatherInformation"
+        style="@android:style/Widget.DeviceDefault.Light.TextView"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="400dp"
         android:layout_margin="40sp"
         android:background="#AA0088AA"
         android:gravity="center"
-        android:text="Place Holder"
+        android:text=""
         android:textAlignment="center"
         android:textColor="@color/material_on_primary_emphasis_high_type"
-        android:textSize="30sp" />
-
-    <Button
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="get Info" />
+        android:textSize="18sp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
