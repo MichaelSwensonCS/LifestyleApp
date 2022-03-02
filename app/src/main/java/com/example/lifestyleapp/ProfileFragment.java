@@ -116,7 +116,6 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
         binding.inchesAuto.setAdapter(inchAdapter);
 
         // Sex
-        RadioGroup radioGroup = getActivity().findViewById(R.id.radioSexGroup);
         binding.radioSexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
@@ -258,6 +257,7 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
             case R.id.submitBtn:
                 if (saveInfo(true)){
                     HomeFragment.updateInfo();
+                    FitnessFragment.updateInfo();
                     Toast.makeText(getContext(), "Info saved", Toast.LENGTH_SHORT).show();
                     if (getDialog() != null)
                         getDialog().dismiss();

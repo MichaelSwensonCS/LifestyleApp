@@ -141,16 +141,28 @@
         android:layout_marginHorizontal="15dp">
 
         <TextView
-            android:id="@+id/genderTV"
+            android:id="@+id/estimatedBMR"
             android:layout_width="500dp"
             android:layout_height="50dp"
             android:layout_weight="1"
+            android:background="#E1F2BB"
             android:gravity="center"
             android:text="Estimated BMR: ((show calories here))"
-            android:textSize="18sp"
-            android:background="#E1F2BB"
-            />
+            android:textSize="18sp" />
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Warning: losing or gaining more than 2 pounds per week may be unsafe."
+        android:id="@+id/tv_warning"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="-10dp"
+        android:layout_marginHorizontal="14dp"
+        />
 
     // user selected BMR
     <com.google.android.material.textfield.TextInputLayout
@@ -163,7 +175,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
-            android:hint="Enter desired BMR:"
+            android:hint="Enter desired change in pounds per week:"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
