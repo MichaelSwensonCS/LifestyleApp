@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -132,6 +133,9 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
             }
         });
 
+        if(binding.imageUser.getDrawable() == null && user.photo != null){
+            binding.imageUser.setImageBitmap(user.photo);
+        }
         // Bind click listener to buttons
         binding.uploadPicture.setOnClickListener(this);
         binding.submitBtn.setOnClickListener(this);
@@ -216,6 +220,10 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
             }
         }
 
+        if(user.photo != null){
+            binding.imageUser.setImageBitmap(user.photo);
+        }
+
         // Pull city and country
         user.country = binding.countryAuto.getText().toString();
         user.city = binding.cityAuto.getText().toString();
@@ -285,13 +293,14 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
             //Get the bitmap
             Bundle extras = data.getExtras();
             mThumbnailImage = (Bitmap) extras.get("data");
-
+            user.photo = (Bitmap) extras.get("data");
             //Open a file and write to it
             if(isExternalStorageWritable()){
                 String filePathString = saveImage(mThumbnailImage);
                 mDisplayIntent.putExtra("imagePath",filePathString);
-                ImageView profile = (ImageView) getActivity().findViewById(R.id.imageView);
-                profile.setImageBitmap(mThumbnailImage);
+                ImageView HomeProfile = (ImageView) getActivity().findViewById(R.id.imageView);
+                HomeProfile.setImageBitmap(mThumbnailImage);
+                binding.imageUser.setImageBitmap(mThumbnailImage);
                 user.photo = mThumbnailImage;
             }
             else{
