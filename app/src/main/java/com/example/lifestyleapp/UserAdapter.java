@@ -43,6 +43,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             switch (view.getId()) {
                 case R.id.buttonSet:
                     ProfileFragment.user = user;
+                    HomeFragment.updateInfo();
+                    FitnessFragment.updateInfo();
                     break;
                 case R.id.buttonEdit:
                     ProfileFragment.user = user;
