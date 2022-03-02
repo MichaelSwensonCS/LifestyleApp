@@ -8,7 +8,9 @@
         android:id="@+id/fitnessFragment"
         android:name="com.example.lifestyleapp.FitnessFragment"
         android:label="fragment_fitness_page"
-        tools:layout="@layout/fragment_fitness_page" />
+        tools:layout="@layout/fragment_fitness_page"/>
+
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.lifestyleapp.ProfileListFragment"
@@ -22,6 +24,9 @@
         <action
             android:id="@+id/action_homeFragment_to_weatherDisplay"
             app:destination="@id/weatherDisplay" />
+        <action
+            android:id="@+id/action_homeFragment_to_fitnessFragment"
+            app:destination="@id/fitnessFragment" />
     </fragment>
     <fragment
         android:id="@+id/weatherDisplay"

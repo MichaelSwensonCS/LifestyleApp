@@ -41,6 +41,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         binding.btnFindHike.setOnClickListener(this);
         binding.btnCalcBmi.setOnClickListener(this);
         binding.btnWeather.setOnClickListener(this);
+        binding.btnFitGoals.setOnClickListener(this);
     }
 
     @Override
@@ -64,7 +65,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                             703 * user.weight/Math.pow(user.heightfeet*12 + user.heightinches,2),  Toast.LENGTH_LONG);
                 toast.show();
                 break;
-
+            case R.id.btn_FitGoals:
+                NavHostFragment.findNavController((HomeFragment.this)).navigate(R.id.action_homeFragment_to_fitnessFragment);
+                break;
             case R.id.btn_Weather:
                 NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_homeFragment_to_weatherDisplay);
                 break;
