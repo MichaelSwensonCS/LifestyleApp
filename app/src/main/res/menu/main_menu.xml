@@ -10,6 +10,4 @@
         android:title="@string/profile" />
     <item android:id="@+id/weatherDisplay"
         android:title="Weather" />
-    <item android:title="Hikes"
-          android:id="@+id/btn_FindHike"/>
 </menu>
