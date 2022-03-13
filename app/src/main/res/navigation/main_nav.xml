@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
     app:startDestination="@id/homeFragment">
+
     <fragment
         android:id="@+id/fitnessFragment"
         android:name="com.example.lifestyleapp.FitnessFragment"
         android:label="fragment_fitness_page"
         tools:layout="@layout/fragment_fitness_page"/>
-
-
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.lifestyleapp.ProfileListFragment"

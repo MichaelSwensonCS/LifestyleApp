@@ -1,6 +1,8 @@
 package com.example.lifestyleapp;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Window;
 
 import androidx.appcompat.app.AlertDialog;
@@ -13,6 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.lifestyleapp.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,9 +28,20 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation_menu);
-        NavController navController = Navigation.findNavController(this,  R.id.nav_host_fragment);
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        Configuration configuration = this.getResources().getConfiguration();
+        int screenWidthDp = configuration.screenWidthDp; //The current width of the available screen space, in dp units, corresponding to screen width resource qualifier.
+        int smallestScreenWidthDp = configuration.smallestScreenWidthDp;
+
+
+        if(smallestScreenWidthDp > 600){
+            NavigationView navigationView = findViewById(R.id.navigation_menu_big);
+            NavController navController = Navigation.findNavController(this,  R.id.nav_host_fragment);
+            NavigationUI.setupWithNavController(navigationView, navController);
+        }else{
+            BottomNavigationView bottomNavigationView = findViewById(R.id.navigation_menu);
+            NavController navController = Navigation.findNavController(this,  R.id.nav_host_fragment);
+            NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        }
 
         ProfileFragment profilePopup = new ProfileFragment();
         profilePopup.setCancelable(false);

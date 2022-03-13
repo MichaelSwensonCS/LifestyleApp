@@ -6,6 +6,8 @@
         <entry key="..\:/Users/Felix/AndroidStudioProjects/LifestyleApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.34739583333333335" />
         <entry key="..\:/Users/Felix/AndroidStudioProjects/LifestyleApp/app/src/main/res/drawable/defaultAlpaca_background.xml" value="0.3484375" />
         <entry key="..\:/Users/Felix/AndroidStudioProjects/LifestyleApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.34739583333333335" />
+        <entry key="..\:/Users/Felix/AndroidStudioProjects/LifestyleApp/app/src/main/res/layout-sw600dp/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/Felix/AndroidStudioProjects/LifestyleApp/app/src/main/res/layout-sw600dp/fragment_home_page.xml" value="0.33" />
         <entry key="..\:/Users/Felix/AndroidStudioProjects/LifestyleApp/app/src/main/res/layout/activity_main.xml" value="0.2695035460992908" />
         <entry key="..\:/Users/Felix/AndroidStudioProjects/LifestyleApp/app/src/main/res/layout/border_image.xml" value="0.22027027027027027" />
         <entry key="..\:/Users/Felix/AndroidStudioProjects/LifestyleApp/app/src/main/res/layout/content_main.xml" value="0.2563405797101449" />
@@ -42,7 +44,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
