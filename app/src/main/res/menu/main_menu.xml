@@ -2,12 +2,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.lifestyleapp.MainActivity">
-    <item android:id="@+id/homeFragment"
-        android:title="@string/home" />
-    <item android:id="@+id/fitnessFragment"
-        android:title="@string/fitness" />
-    <item android:id="@+id/profileFragment"
-        android:title="@string/profile" />
-    <item android:id="@+id/weatherDisplay"
-        android:title="Weather" />
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@android:drawable/alert_light_frame"
+        android:title="@string/home"
+        android:visible="true" />
+    <item
+        android:id="@+id/fitnessFragment"
+        android:icon="@android:drawable/alert_light_frame"
+        android:title="@string/fitness"
+        android:visible="true" />
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@android:drawable/alert_light_frame"
+        android:title="@string/profile"
+        android:visible="true" />
+    <item
+        android:id="@+id/weatherDisplay"
+        android:icon="@android:drawable/alert_light_frame"
+        android:title="Weather"
+        android:visible="true" />
 </menu>
