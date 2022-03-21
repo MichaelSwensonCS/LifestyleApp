@@ -28,12 +28,15 @@
         </ScrollView>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/navigation_menu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="-70dp"
+            android:visibility="visible"
+            android:id="@+id/navigation_menu"
             app:labelVisibilityMode="labeled"
-            app:menu="@menu/main_menu" />
+            app:menu="@menu/main_menu"
+            />
+
 
     </LinearLayout>
 
