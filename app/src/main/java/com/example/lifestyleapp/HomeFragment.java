@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.lifestyleapp.databinding.FragmentHomePageBinding;
@@ -17,12 +19,21 @@ import com.example.lifestyleapp.databinding.FragmentHomePageBinding;
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private static FragmentHomePageBinding binding;
+    private UsersViewModel model;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+
+        model = new ViewModelProvider(this).get(UsersViewModel.class);
+        final Observer<User> userObserver = new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+
+            }
+        };
 
         binding = FragmentHomePageBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -37,7 +48,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        model = new ViewModelProvider(requireActivity()).get(UsersViewModel.class);
+
+        final Observer<User> userObserver = new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                if (binding != null) {
+                    String welcome = String.format("Welcome %s %s", user.firstname, user.lastname);
+                    binding.tvWelcome.setText(welcome);
+                }
+            }
+        };
+
         updateInfo();
+
         binding.btnFindHike.setOnClickListener(this);
         binding.btnCalcBmi.setOnClickListener(this);
         binding.btnWeather.setOnClickListener(this);
