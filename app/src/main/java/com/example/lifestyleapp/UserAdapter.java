@@ -1,53 +1,63 @@
 package com.example.lifestyleapp;
 
 import android.content.DialogInterface;
-import android.graphics.drawable.LayerDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lifestyleapp.databinding.RowUserBinding;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder>{
+import java.util.ArrayList;
+
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
+
+    private UsersViewModel model;
 
     public static class UserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
         private RowUserBinding binding;
         private UserAdapter adapter;
-        User user;
 
         public UserViewHolder(View view, UserAdapter adapter) {
             super(view);
-            user = ProfileFragment.users.get(Math.max(getAdapterPosition(), 0));
+            this.adapter = adapter;
+
             binding = RowUserBinding.bind(view);
-            updateText();
+
+            update(Math.max(getAdapterPosition(), 0));
+
             binding.buttonSet.setOnClickListener(this);
             binding.buttonEdit.setOnClickListener(this);
             binding.buttonDelete.setOnClickListener(this);
-            this.adapter = adapter;
         }
 
-        public void updateText() {
-            binding.textViewName.setText(user.firstname + " " + user.lastname);
-            binding.textViewAge.setText(user.age < 0 ? "Profile Incomplete" : user.age + " Years Old");
+        public void update(User user) {
+            if (binding != null) {
+                String name = String.format("%s %s", user.firstname, user.lastname);
+                binding.textViewName.setText(name);
+                binding.textViewAge.setText(user.age < 0 ? "Profile Incomplete" : user.age + " Years Old");
+            }
+        }
+
+        public void update(int index) {
+            update(adapter.model.getUserList().getValue().get(index));
         }
 
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.buttonSet:
-                    ProfileFragment.user = user;
-                    HomeFragment.updateInfo();
-                    FitnessFragment.updateInfo();
+                    adapter.model.setUser(Math.max(getAdapterPosition(), 0));
                     break;
+
                 case R.id.buttonEdit:
-                    ProfileFragment.user = user;
+                    adapter.model.setUser(Math.max(getAdapterPosition(), 0));
                     ProfileFragment profilePopup = new ProfileFragment();
                     profilePopup.setCancelable(true);
                     profilePopup.show(((AppCompatActivity) view.getContext()).getSupportFragmentManager(), null);
@@ -55,21 +65,24 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                     profilePopup.getDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
                         public void onDismiss(DialogInterface dialogInterface) {
-                            updateText();
+                            update(adapter.model.getUser().getValue());
                         }
                     });
                     break;
                 case R.id.buttonDelete:
-                    if (ProfileFragment.users.size() <= 1)
+                    if (adapter.model.getUserList().getValue().size() <= 1)
                         Toast.makeText(view.getContext(), "Cannot delete last profile", Toast.LENGTH_SHORT).show();
                     else {
                         adapter.notifyItemRemoved(getAdapterPosition());
-                        ProfileFragment.users.remove(user);
-                        ProfileFragment.user = ProfileFragment.users.get(0);
+                        adapter.model.delete(Math.max(getAdapterPosition(), 0));
                     }
                     break;
             }
         }
+    }
+
+    public UserAdapter(UsersViewModel model) {
+        this.model = model;
     }
 
     @Override
@@ -79,13 +92,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     }
 
     @Override
-    public void onBindViewHolder(UserViewHolder holder, int position) {
-        holder.user = ProfileFragment.users.get(position);
-        holder.updateText();
+    public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
+        holder.update(position);
     }
 
     @Override
     public int getItemCount() {
-        return ProfileFragment.users.size();
+        return model.getUserList().getValue().size();
     }
 }

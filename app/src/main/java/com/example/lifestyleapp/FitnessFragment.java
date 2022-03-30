@@ -4,12 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.lifestyleapp.databinding.FragmentFitnessPageBinding;
 
@@ -17,6 +18,8 @@ public class FitnessFragment extends Fragment implements View.OnClickListener {
 
     private static FragmentFitnessPageBinding binding;
     private static double bmr;
+
+    private UsersViewModel model;
 
     @Override
     public View onCreateView(
@@ -29,8 +32,7 @@ public class FitnessFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    public static void updateInfo() {
-        User user = ProfileFragment.user;
+    public static void updateInfo(User user) {
         bmr = -1;
         if (binding == null)
             return;
@@ -51,13 +53,18 @@ public class FitnessFragment extends Fragment implements View.OnClickListener {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        updateInfo();
+
+        model = new ViewModelProvider(requireActivity()).get(UsersViewModel.class);
+        final Observer<User> userObserver = new Observer<User>() {
+            @Override
+            public void onChanged(User user) { updateInfo(user); }
+        };
+        model.getUser().observe(getViewLifecycleOwner(), userObserver);
+
         binding.btnCalcBMR.setOnClickListener(this);
         binding.radioCurrentLifestyle.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                updateInfo();
-            }
+            public void onCheckedChanged(RadioGroup radioGroup, int i) { updateInfo(model.getUser().getValue()); }
         });
     }
 
@@ -87,7 +94,7 @@ public class FitnessFragment extends Fragment implements View.OnClickListener {
                     break;
                 }
 
-                User user = ProfileFragment.user;
+                User user = model.getUser().getValue();
                 // 3500 calories per pound of fat
                 // Approximately 500 calories per pound per day
                 if (binding.radioLoseWeight.isChecked()) {

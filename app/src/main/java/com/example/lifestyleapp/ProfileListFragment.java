@@ -7,13 +7,15 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.lifestyleapp.databinding.FragmentProfileListBinding;
 
 public class ProfileListFragment extends Fragment implements View.OnClickListener {
 
-    FragmentProfileListBinding binding;
+    private static FragmentProfileListBinding binding;
+    private UsersViewModel model;
 
     @Override
     public View onCreateView(
@@ -28,8 +30,10 @@ public class ProfileListFragment extends Fragment implements View.OnClickListene
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        model = new ViewModelProvider(requireActivity()).get(UsersViewModel.class);
+
         binding.buttonNewUser.setOnClickListener(this);
-        binding.recyclerUserList.setAdapter(new UserAdapter());
+        binding.recyclerUserList.setAdapter(new UserAdapter(model));
         binding.recyclerUserList.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
@@ -37,10 +41,8 @@ public class ProfileListFragment extends Fragment implements View.OnClickListene
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.buttonNewUser:
-                User user = new User();
-                ProfileFragment.user = user;
-                ProfileFragment.users.add(user);
-                binding.recyclerUserList.getAdapter().notifyItemChanged(ProfileFragment.users.size());
+                model.newUser();
+                binding.recyclerUserList.getAdapter().notifyItemChanged(model.getUserList().getValue().size());
                 break;
         }
     }

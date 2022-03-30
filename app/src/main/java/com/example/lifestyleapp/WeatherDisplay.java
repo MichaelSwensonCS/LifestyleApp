@@ -1,21 +1,15 @@
 package com.example.lifestyleapp;
 
-import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.core.os.HandlerCompat;
-import androidx.fragment.app.Fragment;
-
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,10 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.text.DecimalFormat;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 
 /**
@@ -40,6 +31,8 @@ import java.util.concurrent.Executors;
  * create an instance of this fragment.
  */
 public class WeatherDisplay extends Fragment{
+
+    private UsersViewModel model;
 
     StringBuilder sb = new StringBuilder();
     TextView weather;
@@ -73,7 +66,7 @@ public class WeatherDisplay extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        model = new ViewModelProvider(requireActivity()).get(UsersViewModel.class);
     }
 
     @Override
@@ -93,7 +86,7 @@ public class WeatherDisplay extends Fragment{
 
     public void getWeatherDetails(View view) {
         String tempUrl = "";
-        String city = ProfileFragment.user.city;//etCity.getText().toString().trim();
+        String city = model.getUser().getValue().city ;//etCity.getText().toString().trim();
         String country = "";// etCountry.getText().toString().trim();
         title.setText("Weather Report for: " + city);
         if(city.equals("")){

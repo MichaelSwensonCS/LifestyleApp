@@ -26,47 +26,38 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
-        model = new ViewModelProvider(this).get(UsersViewModel.class);
-        final Observer<User> userObserver = new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-
-            }
-        };
-
         binding = FragmentHomePageBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
-    public static void updateInfo() {
+    /*public static void updateInfo() {
         User user = ProfileFragment.user;
         if(binding != null && user != null)
             binding.tvWelcome.setText("Welcome " + user.firstname + " " + user.lastname);
-    }
+    }*/
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         model = new ViewModelProvider(requireActivity()).get(UsersViewModel.class);
-
         final Observer<User> userObserver = new Observer<User>() {
             @Override
-            public void onChanged(User user) {
-                if (binding != null) {
-                    String welcome = String.format("Welcome %s %s", user.firstname, user.lastname);
-                    binding.tvWelcome.setText(welcome);
-                }
-            }
+            public void onChanged(User user) { update(user); }
         };
-
-        updateInfo();
+        model.getUser().observe(getViewLifecycleOwner(), userObserver);
 
         binding.btnFindHike.setOnClickListener(this);
         binding.btnCalcBmi.setOnClickListener(this);
         binding.btnWeather.setOnClickListener(this);
         binding.btnFitGoals.setOnClickListener(this);
+    }
+
+    public static void update(User user) {
+        if (binding != null) {
+            String welcome = String.format("Welcome %s %s", user.firstname, user.lastname);
+            binding.tvWelcome.setText(welcome);
+        }
     }
 
     @Override
@@ -81,7 +72,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             //TODO: change this to a popup or something
             case R.id.btn_CalcBmi:
                 Toast toast;
-                User user = ProfileFragment.user;
+                User user = model.getUser().getValue();
                 // BMI = 703 × pounds/(inches)^2
                 if (user == null || user.heightinches < 0 || user.heightfeet < 0 || user.weight < 0)
                     toast = Toast.makeText(getContext(), "Profile info is incomplete.", Toast.LENGTH_LONG);

@@ -2,13 +2,8 @@ package com.example.lifestyleapp;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.Window;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;

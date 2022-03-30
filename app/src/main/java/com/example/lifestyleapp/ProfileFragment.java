@@ -1,37 +1,25 @@
 package com.example.lifestyleapp;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.annotation.Nullable;
-
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.lifestyleapp.databinding.FragmentInitialProfileBinding;
-import com.example.lifestyleapp.databinding.FragmentProfilePageBinding;
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -51,12 +39,9 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
     };
 
     private FragmentInitialProfileBinding binding;
-
     private UsersViewModel model;
 
-    // TODO: move this to somewhere more permanent
-    public static User user;
-    public static ArrayList<User> users;
+    private static User user;
 
     @Override
     public View onCreateView(
@@ -148,17 +133,16 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (users == null)
-            users = new ArrayList<User>();
+        model = new ViewModelProvider(requireActivity()).get(UsersViewModel.class);
 
-        // Create user
-        if (user == null) {
-            user = new User();
-            init(true);
-            // The radio buttons are on male by default
+        boolean init = user == null;
+        user = model.getUser().getValue();
+        //user = model.getUser().getValue().clone();
+
+        // The radio buttons are on male by default
+        if (init)
             user.gender = "male";
-            users.add(user);
-        } else init(false);
+        init(init);
 
         mDisplayIntent = new Intent(getActivity(), view.getClass());
     }
@@ -268,8 +252,9 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
 
             case R.id.submitBtn:
                 if (saveInfo(true)){
-                    HomeFragment.updateInfo();
-                    FitnessFragment.updateInfo();
+                    // Extremely lazy fix
+                    HomeFragment.update(user);
+                    // model.updateCurrentUser(user);
                     Toast.makeText(getContext(), "Info saved", Toast.LENGTH_SHORT).show();
                     if (getDialog() != null)
                         getDialog().dismiss();

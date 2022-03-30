@@ -1,8 +1,6 @@
 package com.example.lifestyleapp;
 
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.provider.MediaStore;
 
 import com.google.gson.Gson;
 
@@ -19,6 +17,25 @@ public class User {
 
     // TODO: Serialize image
     public Bitmap photo;
+
+    public void copy(User user) {
+        this.firstname = user.firstname;
+        this.lastname = user.lastname;
+        this.age = user.age;
+        this.weight = user.weight;
+        this.country = user.country;
+        this.city = user.city;
+        this.heightinches = user.heightinches;
+        this.heightfeet = user.heightfeet;
+        this.gender = user.gender;
+        this.photo = user.photo;
+    }
+
+    public User clone() {
+        User newUser = new User();
+        newUser.copy(this);
+        return newUser;
+    }
 
     /*
     Use this method to convert a User object into a Json string.
