@@ -39,7 +39,7 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
     };
 
     private FragmentInitialProfileBinding binding;
-    private UsersViewModel model;
+    private UserViewModel model;
 
     private static User user;
 
@@ -133,11 +133,11 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        model = new ViewModelProvider(requireActivity()).get(UsersViewModel.class);
+        model = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
         boolean init = user == null;
         user = model.getUser().getValue();
-        //user = model.getUser().getValue().clone();
+        // user = model.getUser().getValue().clone();
 
         // The radio buttons are on male by default
         if (init)
@@ -251,6 +251,7 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
         switch(view.getId()){
 
             case R.id.submitBtn:
+                model.update(user);
                 if (saveInfo(true)){
                     // Extremely lazy fix
                     HomeFragment.update(user);

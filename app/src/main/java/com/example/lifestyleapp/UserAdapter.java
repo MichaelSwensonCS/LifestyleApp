@@ -8,17 +8,45 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lifestyleapp.databinding.RowUserBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
-    private UsersViewModel model;
+    private List<User> users = new ArrayList<>();
+    // TODO: move model out of user adapter
+    private UserViewModel model;
+
+    public UserAdapter(UserViewModel model) {
+        this.model = model;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_user, parent,false);
+        return new UserViewHolder(view, this);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
+        holder.update(users.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return users.size();
+        //return model.getUserList().getValue().size();
+    }
 
     public static class UserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private RowUserBinding binding;
@@ -45,19 +73,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             }
         }
 
-        public void update(int index) {
-            update(adapter.model.getUserList().getValue().get(index));
-        }
+        public void update(int index) { update(adapter.users.get(index)); }
 
         @Override
         public void onClick(View view) {
+            User current = adapter.users.get(Math.max(getAdapterPosition(), 0));
             switch (view.getId()) {
                 case R.id.buttonSet:
-                    adapter.model.setUser(Math.max(getAdapterPosition(), 0));
+                    adapter.model.setUser(current);
                     break;
 
                 case R.id.buttonEdit:
-                    adapter.model.setUser(Math.max(getAdapterPosition(), 0));
+                    adapter.model.setUser(current);
                     ProfileFragment profilePopup = new ProfileFragment();
                     profilePopup.setCancelable(true);
                     profilePopup.show(((AppCompatActivity) view.getContext()).getSupportFragmentManager(), null);
@@ -70,34 +97,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                     });
                     break;
                 case R.id.buttonDelete:
-                    if (adapter.model.getUserList().getValue().size() <= 1)
+                    if (adapter.getItemCount() <= 1)
                         Toast.makeText(view.getContext(), "Cannot delete last profile", Toast.LENGTH_SHORT).show();
                     else {
                         adapter.notifyItemRemoved(getAdapterPosition());
-                        adapter.model.delete(Math.max(getAdapterPosition(), 0));
+                        adapter.model.delete(current);
                     }
                     break;
             }
         }
-    }
-
-    public UserAdapter(UsersViewModel model) {
-        this.model = model;
-    }
-
-    @Override
-    public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_user, parent,false);
-        return new UserViewHolder(view, this);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-        holder.update(position);
-    }
-
-    @Override
-    public int getItemCount() {
-        return model.getUserList().getValue().size();
     }
 }

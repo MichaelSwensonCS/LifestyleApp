@@ -19,7 +19,7 @@ public class FitnessFragment extends Fragment implements View.OnClickListener {
     private static FragmentFitnessPageBinding binding;
     private static double bmr;
 
-    private UsersViewModel model;
+    private UserViewModel model;
 
     @Override
     public View onCreateView(
@@ -54,7 +54,7 @@ public class FitnessFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        model = new ViewModelProvider(requireActivity()).get(UsersViewModel.class);
+        model = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         final Observer<User> userObserver = new Observer<User>() {
             @Override
             public void onChanged(User user) { updateInfo(user); }

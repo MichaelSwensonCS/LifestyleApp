@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             NavigationUI.setupWithNavController(bottomNavigationView, navController);
         }
 
-        UsersViewModel model = new ViewModelProvider(this).get(UsersViewModel.class);
+        UserViewModel model = new ViewModelProvider(this).get(UserViewModel.class);
 
         ProfileFragment profilePopup = new ProfileFragment();
         profilePopup.setCancelable(false);

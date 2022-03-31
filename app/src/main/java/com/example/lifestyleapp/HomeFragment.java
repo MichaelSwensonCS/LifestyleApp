@@ -19,7 +19,7 @@ import com.example.lifestyleapp.databinding.FragmentHomePageBinding;
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private static FragmentHomePageBinding binding;
-    private UsersViewModel model;
+    private UserViewModel model;
 
     @Override
     public View onCreateView(
@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        model = new ViewModelProvider(requireActivity()).get(UsersViewModel.class);
+        model = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         final Observer<User> userObserver = new Observer<User>() {
             @Override
             public void onChanged(User user) { update(user); }
