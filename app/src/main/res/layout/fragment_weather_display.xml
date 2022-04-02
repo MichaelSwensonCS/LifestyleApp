@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/weather_background"
     android:orientation="vertical"
-    tools:context=".WeatherDisplay">
+    tools:context=".WeatherView">
 
     <!-- TODO: Update blank fragment layout -->
 

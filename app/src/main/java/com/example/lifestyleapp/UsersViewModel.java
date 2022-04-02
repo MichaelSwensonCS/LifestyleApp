@@ -1,14 +1,26 @@
 package com.example.lifestyleapp;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
-public class UsersViewModel extends ViewModel {
+public class UsersViewModel extends AndroidViewModel {
     private MutableLiveData<ArrayList<User>> users;
     private MutableLiveData<User> user;
+    private MutableLiveData<Weather> weather;
+    private Repository dataRepository;
+
+    public UsersViewModel(@NonNull Application application) {
+        super(application);
+        dataRepository = Repository.getInstance(application);
+        weather = dataRepository.getData();
+    }
 
     public LiveData<ArrayList<User>> getUserList() {
         if (users == null) {
@@ -20,7 +32,7 @@ public class UsersViewModel extends ViewModel {
         }
         return users;
     }
-
+    //TODO Trigger weather on user city change Here and WeatherView
     public LiveData<User> getUser() {
         if (user == null) {
             user = new MutableLiveData<User>();
@@ -36,12 +48,20 @@ public class UsersViewModel extends ViewModel {
         return user;
     }
 
+    public void setCity(String location){
+        dataRepository.setLocation(location);
+    }
+
     public void delete(User user) {
         ArrayList<User> users = this.users.getValue();
         users.remove(user);
         if (this.user.equals(user))
             this.user.setValue(users.get(0));
         this.users.setValue(users);
+    }
+
+    public LiveData<Weather> getData(){
+        return weather;
     }
 
     public void delete(int index) {

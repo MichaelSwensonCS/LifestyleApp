@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/weatherDisplay"
-        android:name="com.example.lifestyleapp.WeatherDisplay"
+        android:name="com.example.lifestyleapp.WeatherView"
         android:label="fragment_weather_display"
         tools:layout="@layout/fragment_weather_display" >
         <action
