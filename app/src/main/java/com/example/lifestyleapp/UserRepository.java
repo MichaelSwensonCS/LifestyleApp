@@ -13,6 +13,7 @@ public class UserRepository {
 
     private UserDAO userDAO;
     private LiveData<List<User>> users;
+    private LiveData<Integer> user;
 
     public UserRepository(Application app) {
         UserDatabase db = UserDatabase.getInstance(app);
@@ -32,9 +33,7 @@ public class UserRepository {
         new DeleteUserAsyncTask(userDAO).execute(user);
     }
 
-    public void deleteAllUsers() {
-        new DeleteAllUsersAsyncTask(userDAO).execute();
-    }
+    // public void deleteAllUsers() { new DeleteAllUsersAsyncTask(userDAO).execute(); }
 
     public LiveData<List<User>> getUsers() {
         return users;

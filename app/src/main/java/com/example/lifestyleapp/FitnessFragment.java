@@ -55,16 +55,20 @@ public class FitnessFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
 
         model = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
-        final Observer<User> userObserver = new Observer<User>() {
+        final Observer<Integer> userObserver = new Observer<Integer>() {
             @Override
-            public void onChanged(User user) { updateInfo(user); }
+            public void onChanged(Integer user) {
+                updateInfo(model.getUsers().getValue().get(user));
+            }
         };
         model.getUser().observe(getViewLifecycleOwner(), userObserver);
 
         binding.btnCalcBMR.setOnClickListener(this);
         binding.radioCurrentLifestyle.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) { updateInfo(model.getUser().getValue()); }
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                updateInfo(model.getUsers().getValue().get(model.getUser().getValue()));
+            }
         });
     }
 
@@ -94,7 +98,7 @@ public class FitnessFragment extends Fragment implements View.OnClickListener {
                     break;
                 }
 
-                User user = model.getUser().getValue();
+                User user = model.getUsers().getValue().get(model.getUser().getValue());
                 // 3500 calories per pound of fat
                 // Approximately 500 calories per pound per day
                 if (binding.radioLoseWeight.isChecked()) {

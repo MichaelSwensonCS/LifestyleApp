@@ -14,7 +14,7 @@ public class UserViewModel extends AndroidViewModel {
     private UserRepository repo;
 
     private LiveData<List<User>> users;
-    private MutableLiveData<User> user;
+    private MutableLiveData<Integer> user;
 
     public UserViewModel(@NonNull Application app) {
         super(app);
@@ -45,12 +45,13 @@ public class UserViewModel extends AndroidViewModel {
         repo.delete(user);
     }
 
-    public LiveData<User> getUser() {
+    public LiveData<Integer> getUser() {
         if (user == null) {
-            user = new MutableLiveData<User>();
-            User newUser = new User();
+            user = new MutableLiveData<Integer>();
+            /*User newUser = new User();
             user.setValue(newUser);
-            insert(newUser);
+            insert(newUser);*/
+            user.setValue(0);
         }
         return user;
     }
@@ -67,7 +68,7 @@ public class UserViewModel extends AndroidViewModel {
         delete(this.users.getValue().get(index));
     }*/
 
-    public void setUser(User user) {
+    public void setUser(int user) {
         this.user.setValue(user);
     }
 

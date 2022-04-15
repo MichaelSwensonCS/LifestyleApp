@@ -32,10 +32,11 @@ public abstract class UserDatabase extends RoomDatabase{
       @Override
       public void onCreate(@NonNull SupportSQLiteDatabase db) {
           super.onCreate(db);
+          new PopulateDBAsyncTask(instance).execute();
       }
     };
 
-    /*private static class PopulateDBAsyncTask extends AsyncTask<Void, Void, Void> {
+    private static class PopulateDBAsyncTask extends AsyncTask<Void, Void, Void> {
         private UserDAO userDAO;
 
         private PopulateDBAsyncTask(UserDatabase db) {
@@ -44,8 +45,13 @@ public abstract class UserDatabase extends RoomDatabase{
 
         @Override
         protected Void doInBackground(Void... voids) {
-
+            if (!userDAO.getAllUsers().getValue().isEmpty())
+                return null;
+            User user = new User();
+            user.firstname = "New";
+            user.lastname = "User";
+            userDAO.insert(user);
             return null;
         }
-    }*/
+    }
  }

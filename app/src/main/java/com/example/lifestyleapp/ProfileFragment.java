@@ -136,7 +136,7 @@ public class ProfileFragment extends DialogFragment implements View.OnClickListe
         model = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
         boolean init = user == null;
-        user = model.getUser().getValue();
+        user = model.getUsers().getValue().get(model.getUser().getValue());
         // user = model.getUser().getValue().clone();
 
         // The radio buttons are on male by default

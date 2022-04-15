@@ -77,14 +77,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
         @Override
         public void onClick(View view) {
-            User current = adapter.users.get(Math.max(getAdapterPosition(), 0));
+            int pos = Math.max(getAdapterPosition(), 0);
             switch (view.getId()) {
                 case R.id.buttonSet:
-                    adapter.model.setUser(current);
+                    adapter.model.setUser(pos);
                     break;
 
                 case R.id.buttonEdit:
-                    adapter.model.setUser(current);
+                    adapter.model.setUser(pos);
                     ProfileFragment profilePopup = new ProfileFragment();
                     profilePopup.setCancelable(true);
                     profilePopup.show(((AppCompatActivity) view.getContext()).getSupportFragmentManager(), null);
@@ -100,6 +100,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                     if (adapter.getItemCount() <= 1)
                         Toast.makeText(view.getContext(), "Cannot delete last profile", Toast.LENGTH_SHORT).show();
                     else {
+                        List<User> users = adapter.model.getUsers().getValue();
+                        User current = users.get(adapter.model.getUser().getValue());
+                        if (users.get(pos).id == current.id) {
+                            adapter.model.setUser(users.size()-1);
+                        }
                         adapter.notifyItemRemoved(getAdapterPosition());
                         adapter.model.delete(current);
                     }

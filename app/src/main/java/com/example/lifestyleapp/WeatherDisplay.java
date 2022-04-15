@@ -86,7 +86,8 @@ public class WeatherDisplay extends Fragment{
 
     public void getWeatherDetails(View view) {
         String tempUrl = "";
-        String city = model.getUser().getValue().city ;//etCity.getText().toString().trim();
+        User user = model.getUsers().getValue().get(model.getUser().getValue());
+        String city = user.city ;//etCity.getText().toString().trim();
         String country = "";// etCountry.getText().toString().trim();
         title.setText("Weather Report for: " + city);
         if(city.equals("")){

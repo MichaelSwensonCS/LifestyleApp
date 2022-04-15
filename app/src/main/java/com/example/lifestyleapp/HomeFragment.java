@@ -16,6 +16,8 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.lifestyleapp.databinding.FragmentHomePageBinding;
 
+import java.util.List;
+
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private static FragmentHomePageBinding binding;
@@ -41,9 +43,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         super.onViewCreated(view, savedInstanceState);
 
         model = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
-        final Observer<User> userObserver = new Observer<User>() {
+
+        final Observer<List<User>> usersObserver = new Observer<List<User>>() {
             @Override
-            public void onChanged(User user) { update(user); }
+            public void onChanged(List<User> users) {
+                update(model.getUsers().getValue().get(model.getUser().getValue()));
+            }
+        };
+        model.getUsers().observe(getViewLifecycleOwner(), usersObserver);
+
+        final Observer<Integer> userObserver = new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer user) {
+                if (model.getUsers().getValue() != null && !model.getUsers().getValue().isEmpty())
+                    update(model.getUsers().getValue().get(user));
+            }
         };
         model.getUser().observe(getViewLifecycleOwner(), userObserver);
 
@@ -72,7 +86,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             //TODO: change this to a popup or something
             case R.id.btn_CalcBmi:
                 Toast toast;
-                User user = model.getUser().getValue();
+                User user = model.getUsers().getValue().get(model.getUser().getValue());
                 // BMI = 703 × pounds/(inches)^2
                 if (user == null || user.heightinches < 0 || user.heightfeet < 0 || user.weight < 0)
                     toast = Toast.makeText(getContext(), "Profile info is incomplete.", Toast.LENGTH_LONG);

@@ -2,8 +2,10 @@ package com.example.lifestyleapp;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -12,6 +14,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.lifestyleapp.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         UserViewModel model = new ViewModelProvider(this).get(UserViewModel.class);
 
-        ProfileFragment profilePopup = new ProfileFragment();
+        /*ProfileFragment profilePopup = new ProfileFragment();
         profilePopup.setCancelable(false);
-        profilePopup.show(getSupportFragmentManager(), null);
+        profilePopup.show(getSupportFragmentManager(), null);*/
     }
 }
