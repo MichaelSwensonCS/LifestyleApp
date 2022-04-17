@@ -32,7 +32,7 @@ import java.text.DecimalFormat;
  */
 public class WeatherView extends Fragment{
 
-    private UsersViewModel model;
+    private UserViewModel model;
     TextView weather;
     TextView title;
 
@@ -62,7 +62,7 @@ public class WeatherView extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        model = new ViewModelProvider(requireActivity()).get(UsersViewModel.class);
+        model = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
 
     }
