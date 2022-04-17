@@ -2,9 +2,18 @@ package com.example.lifestyleapp;
 
 import android.graphics.Bitmap;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.Gson;
 
+@Entity(tableName = "user_table")
 public class User {
+
+    @PrimaryKey(autoGenerate = true)
+    public int id;
+
     public String firstname;
     public String lastname;
     public int age = -1;
@@ -15,7 +24,10 @@ public class User {
     public int heightfeet = -1;
     public String gender;
 
-    // TODO: Serialize image
+    public String weather;
+
+    // TODO: Serialize image into sql database
+    @Ignore
     public Bitmap photo;
 
     public void copy(User user) {
