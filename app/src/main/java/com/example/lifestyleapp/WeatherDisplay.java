@@ -32,7 +32,7 @@ import java.text.DecimalFormat;
  */
 public class WeatherDisplay extends Fragment{
 
-    private UsersViewModel model;
+    private UserViewModel model;
 
     StringBuilder sb = new StringBuilder();
     TextView weather;
@@ -66,7 +66,7 @@ public class WeatherDisplay extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        model = new ViewModelProvider(requireActivity()).get(UsersViewModel.class);
+        model = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
     }
 
     @Override
@@ -86,7 +86,8 @@ public class WeatherDisplay extends Fragment{
 
     public void getWeatherDetails(View view) {
         String tempUrl = "";
-        String city = model.getUser().getValue().city ;//etCity.getText().toString().trim();
+        User user = model.getUsers().getValue().get(model.getUser().getValue());
+        String city = user.city ;//etCity.getText().toString().trim();
         String country = "";// etCountry.getText().toString().trim();
         title.setText("Weather Report for: " + city);
         if(city.equals("")){
