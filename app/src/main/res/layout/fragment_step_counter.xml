@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:backgroundTint="#FFFFFF"
+    tools:context=".StepCounterFragment"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#40C9C9"
+        android:weightSum="1"
+        >
+        <TextView
+            android:id="@+id/tv_step_counter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_weight="2"
+            android:paddingLeft="40dp"
+            android:paddingTop="20dp"
+            android:text="Step Counter"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="0.7"
+        android:orientation="vertical"
+        android:weightSum="6"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        <ImageView
+            android:id="@+id/yellow_circle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:src="@drawable/yellow_circle_pic"
+            />
+        <TextView
+            android:id="@+id/yellow_circle_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@id/yellow_circle"
+            android:layout_alignTop="@id/yellow_circle"
+            android:layout_alignRight="@id/yellow_circle"
+            android:layout_alignBottom="@id/yellow_circle"
+            android:textSize="60sp"
+            android:gravity="center"
+            android:text="####"
+            android:textColor="#000000"
+            />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_weight="0.2"
+        android:orientation="horizontal"
+        android:paddingLeft="80dp"
+        >
+        <Button
+            android:id="@+id/btn_Start"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="16dp"
+            android:text="Start"
+            android:backgroundTint="#A4F843"
+            android:textColor="#000000"
+            />
+        <Button
+            android:id="@+id/btn_Stop"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="16dp"
+            android:text="Stop"
+            android:backgroundTint="#FF7D01"
+            android:textColor="#000000"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingTop="20dp"
+        android:paddingLeft="120dp"
+        android:textSize="22sp"
+        android:text="Recent Step Count:"
+        android:id="@+id/tv_RecentStepCount"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:textSize="22sp"
+        android:text="####"
+        android:id="@+id/tv_NumberSteps"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_weight="0.3"
+        android:orientation="vertical"
+        >
+    </LinearLayout>
+
+</LinearLayout>

@@ -15,8 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/fitness_page_pic"
-        />
+        android:src="@drawable/fitness_page_pic" />
 
     <TextView
         android:id="@+id/textview_second"
@@ -152,17 +151,16 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_warning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="Warning: losing or gaining more than 2 pounds per week may be unsafe."
-        android:id="@+id/tv_warning"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginHorizontal="14dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="-10dp"
-        android:layout_marginHorizontal="14dp"
-        />
+        android:text="Warning: losing or gaining more than 2 pounds per week may be unsafe."
+        android:textSize="16sp" />
 
     // user selected BMR
     <com.google.android.material.textfield.TextInputLayout
