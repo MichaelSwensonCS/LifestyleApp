@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,8 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="#40C9C9"
-        android:weightSum="1"
-        >
+        android:weightSum="1">
         <TextView
             android:id="@+id/tv_step_counter"
             android:layout_width="match_parent"
@@ -27,8 +27,15 @@
             android:paddingTop="20dp"
             android:text="Step Counter"
             android:textColor="#FFFFFF"
-            android:textSize="32sp"
-            />
+            android:textSize="32sp"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="0.1"
+        android:orientation="vertical">
     </LinearLayout>
 
 
@@ -36,44 +43,39 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="0.7"
+        android:layout_weight="2"
         android:orientation="vertical"
-        android:weightSum="6"
-        >
+        android:weightSum="6">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-        <ImageView
-            android:id="@+id/yellow_circle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:orientation="vertical"
-            android:src="@drawable/yellow_circle_pic"
-            />
-        <TextView
-            android:id="@+id/yellow_circle_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignLeft="@id/yellow_circle"
-            android:layout_alignTop="@id/yellow_circle"
-            android:layout_alignRight="@id/yellow_circle"
-            android:layout_alignBottom="@id/yellow_circle"
-            android:textSize="60sp"
-            android:gravity="center"
-            android:text="####"
-            android:textColor="#000000"
-            />
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/yellow_circle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical"
+                android:src="@drawable/yellow_circle_pic"/>
+
+            <TextView
+                android:id="@+id/tv_yellow_circle_steps"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignLeft="@id/yellow_circle"
+                android:layout_alignTop="@id/yellow_circle"
+                android:layout_alignRight="@id/yellow_circle"
+                android:layout_alignBottom="@id/yellow_circle"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="60sp" />
+
         </RelativeLayout>
     </LinearLayout>
 
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="30dp"
         android:layout_weight="0.2"
         android:orientation="horizontal"
         android:paddingLeft="80dp"
@@ -103,28 +105,28 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_RecentStepCount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
         android:paddingTop="20dp"
         android:paddingLeft="120dp"
         android:textSize="22sp"
         android:text="Recent Step Count:"
-        android:id="@+id/tv_RecentStepCount"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
         />
 
     <TextView
+        android:id="@+id/tv_NumberSteps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingTop="20dp"
-        android:textSize="22sp"
-        android:text="####"
-        android:id="@+id/tv_NumberSteps"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:textSize="22sp"
+        android:text="####"
         />
 
     <LinearLayout

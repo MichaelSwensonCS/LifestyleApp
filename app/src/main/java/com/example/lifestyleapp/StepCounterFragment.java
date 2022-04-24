@@ -1,64 +1,91 @@
 package com.example.lifestyleapp;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StepCounterFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class StepCounterFragment extends Fragment {
+// imports copied from example41
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.widget.TextView;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class StepCounterFragment extends AppCompatActivity {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    // much of the following code was copied from example41
+    private SensorManager mSensorManager;
+    private TextView mTvData;
+    private Sensor mStepCounter;
 
-    public StepCounterFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment StepCounterFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static StepCounterFragment newInstance(String param1, String param2) {
-        StepCounterFragment fragment = new StepCounterFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    // my added buttons
+    private Button mStartButton;
+    private Button mStopButton;
+    //private TextView mPriorStepCount;  // **TODO - implement this
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        setContentView(R.layout.fragment_step_counter);
+
+        mTvData = (TextView) findViewById(R.id.tv_yellow_circle_steps);
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mStepCounter = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+
+        mStartButton = (Button) findViewById(R.id.btn_Start);
+        mStopButton = (Button) findViewById(R.id.btn_Stop);
+
+        mStartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // **TODO - start step counter
+                mStartButton.setEnabled(false);
+                mStopButton.setEnabled(true);
+            }
+        });
+
+        mStopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // **TODO - stop step counter
+                mStopButton.setEnabled(false);
+                mStartButton.setEnabled(true);
+                // **TODO - record and display prior step count amount
+            }
+        });
+    }
+
+    private SensorEventListener mListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            mTvData.setText("" + String.valueOf(sensorEvent.values[0]));
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+
+        }
+    };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(mStepCounter!=null){
+            mSensorManager.registerListener(mListener,mStepCounter,SensorManager.SENSOR_DELAY_NORMAL);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_step_counter, container, false);
+    protected void onPause() {
+        super.onPause();
+        if(mStepCounter!=null){
+            mSensorManager.unregisterListener(mListener);
+        }
     }
 }
