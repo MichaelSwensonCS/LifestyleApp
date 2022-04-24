@@ -3,6 +3,7 @@ package com.example.lifestyleapp;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.View;
@@ -35,12 +36,11 @@ public class StepCounterActivity extends AppCompatActivity {
         mStepCounter = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
     }
 
-    // **TODO - fix this back button
     public void backButton (View view)
     {
         switch(view.getId()) {
             case R.id.btn_back:
-                NavHostFragment.findNavController((StepCounterActivity.this)).navigate(R.id.action_stepCounterActivity_to_homeFragment);
+                Navigation.findNavController(StepCounterActivity.this, R.id.stepCounterActivity).navigate(R.id.action_stepCounterActivity_to_homeFragment);
                 break;
         }
     }
