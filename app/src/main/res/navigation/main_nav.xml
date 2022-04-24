@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_homeFragment_to_fitnessFragment"
             app:destination="@id/fitnessFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_stepCounterActivity"
+            app:destination="@id/stepCounterActivity" />
     </fragment>
     <fragment
         android:id="@+id/weatherDisplay"
@@ -36,4 +39,12 @@
             android:id="@+id/action_weatherDisplay_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <activity
+        android:id="@+id/stepCounterActivity"
+        android:name="com.example.lifestyleapp.StepCounterActivity"
+        android:label="fragment_step_counter"
+        tools:layout="@layout/fragment_step_counter" />
+    <action
+        android:id="@+id/action_stepCounterActivity_to_homeFragment"
+        app:destination="@id/homeFragment" />
 </navigation>

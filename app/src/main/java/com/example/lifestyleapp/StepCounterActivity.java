@@ -2,12 +2,10 @@ package com.example.lifestyleapp;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.SystemClock;
-import android.view.LayoutInflater;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 
 // imports copied from example41
 import android.content.Context;
@@ -17,17 +15,15 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.widget.TextView;
 
-public class StepCounterFragment extends AppCompatActivity {
+public class StepCounterActivity extends AppCompatActivity {
 
-    // much of the following code was copied from example41
+    // much of the step counting code was copied from example41
     private SensorManager mSensorManager;
     private TextView mTvData;
     private Sensor mStepCounter;
 
-    // my added buttons
-    private Button mStartButton;
-    private Button mStopButton;
-    //private TextView mPriorStepCount;  // **TODO - implement this
+    // private TextView mPriorStepCount;  // **TODO - implement recorded steps
+    //  **TODO - implement start/stop step counter with gestures
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,28 +33,16 @@ public class StepCounterFragment extends AppCompatActivity {
         mTvData = (TextView) findViewById(R.id.tv_yellow_circle_steps);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mStepCounter = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+    }
 
-        mStartButton = (Button) findViewById(R.id.btn_Start);
-        mStopButton = (Button) findViewById(R.id.btn_Stop);
-
-        mStartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // **TODO - start step counter
-                mStartButton.setEnabled(false);
-                mStopButton.setEnabled(true);
-            }
-        });
-
-        mStopButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // **TODO - stop step counter
-                mStopButton.setEnabled(false);
-                mStartButton.setEnabled(true);
-                // **TODO - record and display prior step count amount
-            }
-        });
+    // **TODO - fix this back button
+    public void backButton (View view)
+    {
+        switch(view.getId()) {
+            case R.id.btn_back:
+                NavHostFragment.findNavController((StepCounterActivity.this)).navigate(R.id.action_stepCounterActivity_to_homeFragment);
+                break;
+        }
     }
 
     private SensorEventListener mListener = new SensorEventListener() {

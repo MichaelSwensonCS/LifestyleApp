@@ -65,6 +65,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         binding.btnCalcBmi.setOnClickListener(this);
         binding.btnWeather.setOnClickListener(this);
         binding.btnFitGoals.setOnClickListener(this);
+        binding.btnStepCounter.setOnClickListener(this);
     }
 
     public static void update(User user) {
@@ -83,7 +84,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
-            //TODO: change this to a popup or something
             case R.id.btn_CalcBmi:
                 Toast toast;
                 User user = model.getUsers().getValue().get(model.getUser().getValue());
@@ -103,6 +103,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.btn_FindHike:
                 findHikes();
+                break;
+            case R.id.btn_Step_Counter:
+                NavHostFragment.findNavController((HomeFragment.this)).navigate(R.id.action_homeFragment_to_stepCounterActivity);
                 break;
         }
     }

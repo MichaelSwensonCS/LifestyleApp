@@ -90,6 +90,15 @@
             android:text="Weather In My Area"
             android:backgroundTint="#01C6B2"
             />
+        <Button
+            android:id="@+id/btn_Step_Counter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:text="Step Counter"
+            android:backgroundTint="#01C6B2"
+            />
 
     </LinearLayout>
 
