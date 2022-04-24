@@ -41,11 +41,6 @@
         <entry key="..\:/Users/kaithyl/repos/android studio/LifestyleApp/app/src/main/res/menu/menu_main.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/kaithyl/repos/android studio/LifestyleApp/app/src/main/res/mipmap-anydpi-v26/default_alpaca.xml" value="0.168" />
         <entry key="..\:/Users/kaithyl/repos/android studio/LifestyleApp/app/src/main/res/mipmap-anydpi-v26/default_alpaca_round.xml" value="0.1675" />
-        <entry key="app/src/main/res/drawable/yellow_circle_pic.xml" value="0.267" />
-        <entry key="app/src/main/res/layout/fragment_home_page.xml" value="0.2572310959083447" />
-        <entry key="app/src/main/res/layout/fragment_profile_page.xml" value="0.20199275362318841" />
-        <entry key="app/src/main/res/layout/fragment_step_counter.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/step_counter_fragment.xml" value="0.20199275362318841" />
       </map>
     </option>
   </component>
