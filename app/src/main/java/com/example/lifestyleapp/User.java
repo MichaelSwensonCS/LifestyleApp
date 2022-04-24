@@ -23,6 +23,7 @@ public class User {
     public int heightinches = -1;
     public int heightfeet = -1;
     public String gender;
+    public int stepcount;
 
     public String weather;
 
@@ -41,6 +42,7 @@ public class User {
         this.heightfeet = user.heightfeet;
         this.gender = user.gender;
         this.photo = user.photo;
+        this.stepcount = user.stepcount;
     }
 
     public User clone() {

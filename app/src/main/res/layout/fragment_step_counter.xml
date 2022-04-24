@@ -24,6 +24,7 @@
             android:layout_gravity="left"
             android:scaleType="fitCenter"
             android:onClick="backButton"
+            android:background="#40C9C9"
             android:src="@drawable/back_button" />
 
         <TextView
