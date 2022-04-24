@@ -107,7 +107,6 @@
         android:gravity="center"
         android:paddingTop="10dp"
         android:textSize="22sp"
-        android:text="####"
         />
 
     <LinearLayout
