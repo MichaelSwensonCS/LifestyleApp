@@ -1,16 +1,19 @@
 package com.example.lifestyleapp;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.Environment;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
+import androidx.sqlite.db.SimpleSQLiteQuery;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
@@ -23,7 +26,6 @@ import com.google.android.material.navigation.NavigationView;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,22 +69,43 @@ public class MainActivity extends AppCompatActivity {
         profilePopup.show(getSupportFragmentManager(), null);*/
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        uploadFile();
+    }
+
     private void uploadFile() {
-        File exampleFile = new File(getApplicationContext().getFilesDir(), "ExampleKey");
 
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(exampleFile));
-            writer.append("Example file contents");
-            writer.close();
-        } catch (Exception exception) {
-            Log.e("MyAmplifyApp", "Upload failed", exception);
+        if(isExternalStorageWritable()) {
+            //UserDatabase.getInstance(this.getBaseContext()).close();
+
+            File db2 = getDatabasePath("user_database");
+            //UserDatabase db = UserDatabase.getInstance(this.getApplication());
+            //UserDAO userDao;
+            //userDao = db.userDAO();
+           // userDao.checkpoint(new SimpleSQLiteQuery("pragma wal_checkpoint(full)"));
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(db2));
+                writer.close();
+            } catch (Exception exception) {
+                Log.e("MyAmplifyApp", "Upload failed", exception);
+            }
+
+            Amplify.Storage.uploadFile(
+                    "LifeStyleAppBak",
+                    db2,
+                    result -> Log.i("LifeStyleApp", "Successfully uploaded: " + result.getKey()),
+                    storageFailure -> Log.e("LifeStyleApp", "Upload failed", storageFailure)
+            );
         }
-
-        Amplify.Storage.uploadFile(
-                "ExampleKey",
-                exampleFile,
-                result -> Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey()),
-                storageFailure -> Log.e("MyAmplifyApp", "Upload failed", storageFailure)
-        );
+    }
+    private boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
     }
 }

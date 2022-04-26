@@ -6,7 +6,9 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.RawQuery;
 import androidx.room.Update;
+import androidx.sqlite.db.SupportSQLiteQuery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,4 +30,7 @@ public interface UserDAO {
 
     @Query("SELECT * FROM user_table ORDER BY id DESC")
     LiveData<List<User>> getAllUsers();
+
+    @RawQuery
+    int checkpoint(SupportSQLiteQuery supportSQLiteQuery);
 }
