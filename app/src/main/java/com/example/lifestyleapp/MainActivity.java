@@ -6,9 +6,12 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.view.GestureDetectorCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -30,6 +33,7 @@ import java.io.FileWriter;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private GestureDetectorCompat mDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         /*ProfileFragment profilePopup = new ProfileFragment();
         profilePopup.setCancelable(false);
         profilePopup.show(getSupportFragmentManager(), null);*/
+
+        mDetector = new GestureDetectorCompat(this, new MyGestureListener());
 
     }
 
@@ -107,5 +113,30 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    //Gesture Detection Code
+    //Majority of code comes from the Android Developers Documentation
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.mDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+        private static final String DEBUG_TAG = "Gestures";
+
+        //Always implement to return true since onDown is called for every gesture
+        @Override
+        public boolean onDown(MotionEvent event) {
+            Log.d(DEBUG_TAG,"onDown: " + event.toString());
+            return true;
+        }
+
+        //The gesture that will start our step counter
+        @Override
+        public void onLongPress(MotionEvent event) {
+            Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
+        }
     }
 }
