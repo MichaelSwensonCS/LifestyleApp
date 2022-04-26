@@ -58,7 +58,9 @@ public class FitnessFragment extends Fragment implements View.OnClickListener {
         final Observer<Integer> userObserver = new Observer<Integer>() {
             @Override
             public void onChanged(Integer user) {
-                updateInfo(model.getUsers().getValue().get(user));
+                if(model.getUsers().getValue() != null){
+                    updateInfo(model.getUsers().getValue().get(user));
+                }
             }
         };
         model.getUser().observe(getViewLifecycleOwner(), userObserver);
@@ -67,7 +69,9 @@ public class FitnessFragment extends Fragment implements View.OnClickListener {
         binding.radioCurrentLifestyle.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                updateInfo(model.getUsers().getValue().get(model.getUser().getValue()));
+                if(model.getUsers().getValue() != null) {
+                    updateInfo(model.getUsers().getValue().get(model.getUser().getValue()));
+                }
             }
         });
     }

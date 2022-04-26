@@ -45,7 +45,7 @@ public abstract class UserDatabase extends RoomDatabase{
 
         @Override
         protected Void doInBackground(Void... voids) {
-            if (!userDAO.getAllUsers().getValue().isEmpty())
+            if (!userDAO.getAllUsers().getValue().isEmpty() && (userDAO.getAllUsers().getValue() != null))
                 return null;
             User user = new User();
             user.firstname = "New";

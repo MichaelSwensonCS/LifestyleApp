@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:background="#FFFFFF"
     android:backgroundTint="#FFFFFF"
-    tools:context=".StepCounterActivity"
+    tools:context=".StepCounterFragment"
     >
 
     <LinearLayout
@@ -17,23 +17,12 @@
         android:background="#40C9C9"
         android:weightSum="1">
 
-        <ImageButton
-            android:id="@+id/btn_back"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:scaleType="fitCenter"
-            android:onClick="backButton"
-            android:background="#40C9C9"
-            android:src="@drawable/back_button" />
-
         <TextView
             android:id="@+id/tv_step_counter"
             android:layout_width="293dp"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:paddingLeft="34dp"
             android:paddingTop="20dp"
             android:text="Step Counter"

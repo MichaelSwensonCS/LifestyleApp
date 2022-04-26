@@ -47,6 +47,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         final Observer<List<User>> usersObserver = new Observer<List<User>>() {
             @Override
             public void onChanged(List<User> users) {
+                if(users.size() > 0)
                 update(model.getUsers().getValue().get(model.getUser().getValue()));
             }
         };
@@ -105,7 +106,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 findHikes();
                 break;
             case R.id.btn_Step_Counter:
-                NavHostFragment.findNavController((HomeFragment.this)).navigate(R.id.action_homeFragment_to_stepCounterActivity);
+                NavHostFragment.findNavController((HomeFragment.this)).navigate(R.id.action_homeFragment_to_stepCounterFragment);
                 break;
         }
     }

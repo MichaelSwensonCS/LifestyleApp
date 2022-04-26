@@ -71,21 +71,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onDestroy() {
+        super.onDestroy();
         uploadFile();
     }
 
     private void uploadFile() {
 
         if(isExternalStorageWritable()) {
-            //UserDatabase.getInstance(this.getBaseContext()).close();
+            UserDatabase.getInstance(this.getBaseContext()).close();
 
             File db2 = getDatabasePath("user_database");
-            //UserDatabase db = UserDatabase.getInstance(this.getApplication());
-            //UserDAO userDao;
-            //userDao = db.userDAO();
-           // userDao.checkpoint(new SimpleSQLiteQuery("pragma wal_checkpoint(full)"));
+            UserDatabase db = UserDatabase.getInstance(this.getApplication());
+            UserDAO userDao;
+            userDao = db.userDAO();
+            userDao.checkpoint(new SimpleSQLiteQuery("pragma wal_checkpoint(full)"));
             try {
                 BufferedWriter writer = new BufferedWriter(new FileWriter(db2));
                 writer.close();
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             Amplify.Storage.uploadFile(
-                    "LifeStyleAppBak",
+                    "LifeStyleAppBak" + System.currentTimeMillis(),
                     db2,
                     result -> Log.i("LifeStyleApp", "Successfully uploaded: " + result.getKey()),
                     storageFailure -> Log.e("LifeStyleApp", "Upload failed", storageFailure)
