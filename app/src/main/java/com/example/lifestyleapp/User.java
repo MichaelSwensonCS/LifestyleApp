@@ -23,7 +23,7 @@ public class User {
     public int heightinches = -1;
     public int heightfeet = -1;
     public String gender;
-    public int stepcount;
+    public int stepcount = 1;
 
     public String weather;
 

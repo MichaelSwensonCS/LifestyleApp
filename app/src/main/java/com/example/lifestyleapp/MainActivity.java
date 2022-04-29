@@ -61,35 +61,23 @@ public class MainActivity extends AppCompatActivity {
             NavigationView navigationView = findViewById(R.id.navigation_menu_big);
             NavController navController = Navigation.findNavController(this,  R.id.nav_host_fragment);
             NavigationUI.setupWithNavController(navigationView, navController);
-            navigationView.setOnTouchListener(touchListener);
         }else{
             BottomNavigationView bottomNavigationView = findViewById(R.id.navigation_menu);
             NavController navController = Navigation.findNavController(this,  R.id.nav_host_fragment);
             NavigationUI.setupWithNavController(bottomNavigationView, navController);
-            bottomNavigationView.setOnTouchListener(touchListener);
         }
 
         UserViewModel model = new ViewModelProvider(this).get(UserViewModel.class);
+
 
         /*ProfileFragment profilePopup = new ProfileFragment();
         profilePopup.setCancelable(false);
         profilePopup.show(getSupportFragmentManager(), null);*/
 
-        /// Gesture Code
-        mDetector = new GestureDetectorCompat(this, new MyGestureListener());
 
 
     }
 
-    /* This touch listener will pass everything to the gesture detector.
-     * Saving us the hassle of interpresting raw data.
-     */
-    View.OnTouchListener touchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            return mDetector.onTouchEvent(motionEvent);
-        }
-    };
 
     @Override
     protected void onDestroy() {
@@ -128,37 +116,5 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return false;
-    }
-
-    //Gesture Detection Code
-    //Majority of code comes from the Android Developers Documentation
-    @Override
-    public boolean onTouchEvent(MotionEvent event){
-        this.mDetector.onTouchEvent(event);
-        return super.onTouchEvent(event);
-    }
-
-    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
-        private static final String DEBUG_TAG = "Gestures";
-
-        //Always implement to return true since onDown is called for every gesture
-        @Override
-        public boolean onDown(MotionEvent event) {
-            Log.d(DEBUG_TAG,"onDown: " + event.toString());
-            return true;
-        }
-
-        //The gesture that will start our step counter
-        @Override
-        public void onLongPress(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
-        }
-
-        //The gesture that will start our step counter
-        @Override
-        public boolean onDoubleTap(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
-            return true;
-        }
     }
 }
